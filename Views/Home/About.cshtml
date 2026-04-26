@@ -1,0 +1,242 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "InternHub | About Us";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/about.css" />
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="container nav-shell">
+            <a href="/Home/Index" class="brand"><span class="brand-icon">▣</span>InternHub</a>
+            <div class="nav-links">
+                <a href="/Home/Index">Home</a>
+                <a class="active" href="/Home/About">About Us</a>
+                <a href="/Home/Contact">Contact Us</a>
+            </div>
+            <div class="actions">
+                <a class="btn btn-ghost" href="/Account/Login">Login</a>
+                <a class="btn btn-cyan" href="/Account/Signup">Sign Up</a>
+            </div>
+            <button id="menuBtn" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div id="mobileDrawer" class="mobile-drawer container">
+            <a href="/Home/Index">Home</a>
+            <a class="active" href="/Home/About">About Us</a>
+            <a href="/Home/Contact">Contact Us</a>
+            <a class="btn btn-ghost" href="/Account/Login">Login</a>
+            <a class="btn btn-cyan" href="/Account/Signup">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-orb orb-1"></div>
+            <div class="hero-orb orb-2"></div>
+            <div class="container hero-inner fade-up">
+                <p class="eyebrow">ABOUT US</p>
+                <h1>Built by developers,<br /><span>for developers</span></h1>
+                <p class="hero-copy">
+                    InternHub was born out of frustration. Dev teams everywhere were managing interns through spreadsheets and Slack threads. We built the tool we always wished we had.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container story-grid">
+                <article class="story-text fade-up">
+                    <p class="section-label">OUR STORY</p>
+                    <h2>From a spreadsheet nightmare to a platform</h2>
+                    <p>In 2022, our founding team was leading a 15-person engineering department at a fast-growing startup. Every quarter they hired 8-12 interns. Every quarter, managing them was chaos - missed deadlines, lost feedback, no visibility into who was doing what.</p>
+                    <p>We tried every tool on the market. Nothing was built for the specific rhythm of intern programs: rotating cohorts, structured evaluations, task tracking tied to real dev workflows, and time-boxed reporting for HR.</p>
+                    <p>So we built InternHub. What started as an internal tool became the platform that 340+ companies now rely on to run their intern programs with confidence.</p>
+                    <div class="inline-stats">
+                        <div><strong>2022</strong><span>Founded</span></div>
+                        <div><strong>340+</strong><span>Companies</span></div>
+                        <div><strong>2,400+</strong><span>Interns</span></div>
+                    </div>
+                </article>
+                <aside class="timeline-card fade-up">
+                    <h3>Timeline</h3>
+                    <div class="timeline">
+                        <article class="item">
+                            <span class="dot"></span>
+                            <p class="year">2022</p>
+                            <h4>Founded in Boston</h4>
+                            <p>Built as an internal tool for our own eng team.</p>
+                        </article>
+                        <article class="item">
+                            <span class="dot"></span>
+                            <p class="year">2023</p>
+                            <h4>First 50 Companies</h4>
+                            <p>Launched publicly, adopted by 50 companies in 3 months.</p>
+                        </article>
+                        <article class="item">
+                            <span class="dot"></span>
+                            <p class="year">2024</p>
+                            <h4>Series A Funding</h4>
+                            <p>Raised $4M to scale the platform and grow the team.</p>
+                        </article>
+                        <article class="item">
+                            <span class="dot"></span>
+                            <p class="year">2025</p>
+                            <h4>2,400+ Interns Managed</h4>
+                            <p>Now the leading intern management platform for dev teams.</p>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <header class="centered fade-up">
+                    <p class="section-label">OUR MISSION</p>
+                    <h2>Why we do what we do</h2>
+                    <p>We believe intern programs should be a competitive advantage - not an administrative burden. Our mission is to give every dev team the clarity, structure, and tools to turn interns into real contributors.</p>
+                </header>
+                <div class="values-grid">
+                    <article class="value-card fade-up" style="transition-delay:0s;">
+                        <div class="icon-box">🎯</div>
+                        <h3>Built for Dev Teams</h3>
+                        <p>Every feature is designed around the real workflow of engineering leads - not generic HR processes.</p>
+                    </article>
+                    <article class="value-card fade-up" style="transition-delay:0.1s;">
+                        <div class="icon-box">⚡</div>
+                        <h3>Speed Over Process</h3>
+                        <p>We strip away bureaucracy. Assign tasks in seconds, get progress updates without chasing, generate reports without effort.</p>
+                    </article>
+                    <article class="value-card fade-up" style="transition-delay:0.2s;">
+                        <div class="icon-box">🤝</div>
+                        <h3>Intern-First Thinking</h3>
+                        <p>Great intern experiences lead to great hires. We design for the intern's clarity as much as the manager's visibility.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <header class="centered fade-up">
+                    <p class="section-label">THE TEAM</p>
+                    <h2>The people behind InternHub</h2>
+                    <p>A small team of engineers, designers, and operators who've all managed interns and lived the chaos firsthand.</p>
+                </header>
+                <div class="team-grid">
+                    <article class="team-card fade-up" style="transition-delay:0s;">
+                        <div class="avatar">AK</div>
+                        <h3>Alex Kim</h3>
+                        <p class="role">Co-founder & CEO</p>
+                        <p class="bio">Former engineering lead at Stripe. Managed 40+ interns over 5 years. Built InternHub to solve his own pain.</p>
+                        <div class="social-links"><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+                    </article>
+                    <article class="team-card fade-up" style="transition-delay:0.08s;">
+                        <div class="avatar">NR</div>
+                        <h3>Nadia Ramirez</h3>
+                        <p class="role">Co-founder & CTO</p>
+                        <p class="bio">Ex-Google SWE. Obsessed with developer tooling and clean systems. Architected InternHub from scratch.</p>
+                        <div class="social-links"><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+                    </article>
+                    <article class="team-card fade-up" style="transition-delay:0.16s;">
+                        <div class="avatar">JO</div>
+                        <h3>James Osei</h3>
+                        <p class="role">Head of Product</p>
+                        <p class="bio">Previously at Notion and Linear. Believes great software should feel invisible. Owns every pixel of InternHub.</p>
+                        <div class="social-links"><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+                    </article>
+                    <article class="team-card fade-up" style="transition-delay:0.24s;">
+                        <div class="avatar">LT</div>
+                        <h3>Lena Torres</h3>
+                        <p class="role">Head of Customer Success</p>
+                        <p class="bio">Spent 6 years in HR tech. Bridges the gap between what eng teams need and what HR teams report on.</p>
+                        <div class="social-links"><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="numbers">
+            <div class="container numbers-grid">
+                <article class="stat">
+                    <p class="stat-num" data-target="2400" data-suffix="+">0+</p>
+                    <span class="line"></span>
+                    <p>Interns Managed</p>
+                </article>
+                <article class="stat">
+                    <p class="stat-num" data-target="340" data-suffix="+">0+</p>
+                    <span class="line"></span>
+                    <p>Companies</p>
+                </article>
+                <article class="stat">
+                    <p class="stat-num" data-target="98" data-suffix="%">0%</p>
+                    <span class="line"></span>
+                    <p>On-Time Delivery Rate</p>
+                </article>
+                <article class="stat">
+                    <p class="stat-num static">4.9★</p>
+                    <span class="line"></span>
+                    <p>Average Rating</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container centered fade-up">
+                <p class="section-label">JOIN US</p>
+                <h2>Be part of something better</h2>
+                <p>Whether you're a company looking to run a better intern program, or a developer who wants to contribute - we'd love to connect.</p>
+                <div class="cta-actions">
+                    <a class="btn btn-cyan btn-lg" href="/Home/Index#cta">Get Started Free →</a>
+                    <a class="btn btn-ghost btn-lg" href="/Home/Contact">Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p class="brand"><span class="brand-icon">▣</span>InternHub</p>
+                <p class="footer-tag">The intern management platform built for modern dev teams.</p>
+            </div>
+            <div>
+                <h4>Product</h4>
+                <a href="/Home/Index#home">Features</a>
+                <a href="/Home/Index#aboutus">How It Works</a>
+                <a href="/Home/Index#cta">Pricing</a>
+                <a href="/Home/Index#stats">Changelog</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="/Home/About">About Us</a>
+                <a href="#">Blog</a>
+                <a href="#">Careers</a>
+                <a href="/Home/Contact">Contact</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="/Home/Privacy">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2025 InternHub. All rights reserved.</p>
+            <div class="footer-socials"><a href="#">LinkedIn</a><a href="#">Twitter</a><a href="#">GitHub</a></div>
+        </div>
+    </footer>
+
+    <script src="/js/about.js"></script>
+</body>
+</html>

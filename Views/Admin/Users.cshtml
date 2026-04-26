@@ -1,0 +1,79 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Users";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <div>
+        <h2>All Interns <span class="pill cyan-soft">47</span></h2>
+    </div>
+    <div class="toolbar-actions">
+        <input type="search" placeholder="Search interns..." />
+        <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
+        <button class="btn ghost" type="button">Export CSV</button>
+    </div>
+</section>
+
+<div class="filter-tabs" data-filter-tabs="users">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="active">Active</button>
+    <button data-filter="pending">Pending</button>
+    <button data-filter="rejected">Rejected</button>
+    <button data-filter="completed">Completed</button>
+</div>
+
+<div class="table-wrap">
+    <table class="admin-table" data-users-table>
+        <thead>
+            <tr><th><input type="checkbox" /></th><th>#</th><th>Name</th><th>Email</th><th>Major</th><th>Status</th><th>Progress</th><th>Join Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            <tr data-status="active"><td><input type="checkbox" /></td><td>01</td><td><div class="name-cell"><span class="mini-avatar web">SA</span><strong>Sara Ahmed</strong></div></td><td>sara@internhub.io</td><td><span class="pill cyan-soft">Web Dev</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line web"><i style="--w:78%"></i></div>78%</td><td>2026-01-10</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 1 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Sara Ahmed" data-email="sara@internhub.io" data-major="Web Dev" data-status="Active" data-progress="78" data-skills=".NET, API, Docker, SQL">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="pending"><td><input type="checkbox" /></td><td>02</td><td><div class="name-cell"><span class="mini-avatar ai">OB</span><strong>Omar Bakri</strong></div></td><td>omar@internhub.io</td><td><span class="pill purple-soft">AI</span></td><td><span class="pill amber-soft">Pending</span></td><td><div class="progress-line ai"><i style="--w:30%"></i></div>30%</td><td>2026-02-02</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 2 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Omar Bakri" data-email="omar@internhub.io" data-major="AI" data-status="Pending" data-progress="30" data-skills="Python, ML, SQL">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="active"><td><input type="checkbox" /></td><td>03</td><td><div class="name-cell"><span class="mini-avatar sec">LN</span><strong>Lina Nasser</strong></div></td><td>lina@internhub.io</td><td><span class="pill amber-soft">Security</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line sec"><i style="--w:92%"></i></div>92%</td><td>2026-01-17</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 3 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Lina Nasser" data-email="lina@internhub.io" data-major="Security" data-status="Active" data-progress="92" data-skills="Linux, SOC, SIEM">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="active"><td><input type="checkbox" /></td><td>04</td><td><div class="name-cell"><span class="mini-avatar web">KM</span><strong>Karim Mansour</strong></div></td><td>karim@internhub.io</td><td><span class="pill cyan-soft">Web Dev</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line web"><i style="--w:55%"></i></div>55%</td><td>2026-03-01</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 4 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Karim Mansour" data-email="karim@internhub.io" data-major="Web Dev" data-status="Active" data-progress="55" data-skills="C#, Razor, SQL">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="completed"><td><input type="checkbox" /></td><td>05</td><td><div class="name-cell"><span class="mini-avatar data">RS</span><strong>Rania Saleh</strong></div></td><td>rania@internhub.io</td><td><span class="pill green-soft">Data</span></td><td><span class="pill purple-soft">Completed</span></td><td><div class="progress-line data"><i style="--w:100%"></i></div>100%</td><td>2025-12-08</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 5 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Rania Saleh" data-email="rania@internhub.io" data-major="Data" data-status="Rejected" data-progress="100" data-skills="ETL, Spark, SQL">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="rejected"><td><input type="checkbox" /></td><td>06</td><td><div class="name-cell"><span class="mini-avatar ai">KM</span><strong>Khaled Mirza</strong></div></td><td>khaled@internhub.io</td><td><span class="pill purple-soft">AI</span></td><td><span class="pill red-soft">Rejected</span></td><td><div class="progress-line ai"><i style="--w:0%"></i></div>0%</td><td>2026-02-13</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 6 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Khaled Mirza" data-email="khaled@internhub.io" data-major="AI" data-status="Rejected" data-progress="0" data-skills="Python, CV">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="active"><td><input type="checkbox" /></td><td>07</td><td><div class="name-cell"><span class="mini-avatar sec">DY</span><strong>Dana Yousef</strong></div></td><td>dana@internhub.io</td><td><span class="pill amber-soft">Security</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line sec"><i style="--w:61%"></i></div>61%</td><td>2026-01-23</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 7 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Dana Yousef" data-email="dana@internhub.io" data-major="Security" data-status="Active" data-progress="61" data-skills="OWASP, PenTest, SIEM">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+            <tr data-status="pending"><td><input type="checkbox" /></td><td>08</td><td><div class="name-cell"><span class="mini-avatar web">FH</span><strong>Faris Hassan</strong></div></td><td>faris@internhub.io</td><td><span class="pill cyan-soft">Web Dev</span></td><td><span class="pill amber-soft">Pending</span></td><td><div class="progress-line web"><i style="--w:15%"></i></div>15%</td><td>2026-04-01</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 8 })">👁</a><button type="button" class="icon-btn-inline" data-edit-trigger data-open-modal="editUserModal" data-full-name="Faris Hassan" data-email="faris@internhub.io" data-major="Web Dev" data-status="Pending" data-progress="15" data-skills="HTML, CSS, JS">✏️</button><a href="@Url.Action("Users","Admin")" data-confirm="Delete this user?">🗑</a></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination-bar">
+    <span>Showing 1-10 of 47 results</span>
+    <div><button class="btn ghost" type="button">Prev</button><button class="pill cyan">1</button><button class="pill">2</button><button class="pill">3</button><button class="btn ghost" type="button">Next</button></div>
+</div>
+
+<div class="modal-overlay" id="editUserModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+        <h3>Edit User</h3>
+        <form class="edit-user-form" action="@Url.Action("Users","Admin")" method="get">
+            <label>Full Name <input type="text" data-edit-field="fullName" /></label>
+            <label>Email <input type="email" data-edit-field="email" /></label>
+            <label>Major
+                <select data-edit-field="major">
+                    <option>Web Dev</option>
+                    <option>AI</option>
+                    <option>Security</option>
+                    <option>Data</option>
+                </select>
+            </label>
+            <label>Status
+                <select data-edit-field="status">
+                    <option>Active</option>
+                    <option>Pending</option>
+                    <option>Rejected</option>
+                </select>
+            </label>
+            <label>Progress: <span data-progress-output>0%</span>
+                <input type="range" min="0" max="100" value="0" data-edit-field="progress" />
+            </label>
+            <label>Skills <input type="text" data-edit-field="skills" placeholder=".NET, API, Docker, SQL" /></label>
+            <div class="modal-actions">
+                <button class="btn cyan" type="submit">Save Changes</button>
+                <button class="btn ghost" type="button" data-close-modal>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

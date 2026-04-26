@@ -1,0 +1,32 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Notifications";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <h2>Notifications <span class="pill cyan-soft" data-unread-count>3</span></h2>
+    <div class="toolbar-actions">
+        <form method="post" action="@Url.Action("MarkAllRead", "Admin")">
+            @Html.AntiForgeryToken()
+            <button class="btn ghost" type="submit" data-mark-all>Mark All as Read</button>
+        </form>
+        <select><option>All</option><option>Unread</option><option>Applications</option><option>Tasks</option><option>System</option></select>
+    </div>
+</section>
+
+<section class="card">
+    <div class="filter-tabs"><button class="active">All</button><button>Unread</button><button>Applications</button><button>Tasks</button><button>System</button></div>
+    <ul class="notice-list" data-notice-list>
+        <li class="notice-item unread"><span class="notice-icon green">✓</span><div><strong>Sara Ahmed's application approved</strong><p>Accepted into Web Development track.</p></div><time>2 hours ago</time><i class="dot cyan unread-dot"></i></li>
+        <li class="notice-item unread"><span class="notice-icon cyan">📋</span><div><strong>Omar Bakri submitted Task #4</strong><p>Submission requires mentor review.</p></div><time>3 hours ago</time><i class="dot cyan unread-dot"></i></li>
+        <li class="notice-item unread"><span class="notice-icon amber">⏰</span><div><strong>New application from Rania Saleh</strong><p>Awaiting admin decision.</p></div><time>5 hours ago</time><i class="dot cyan unread-dot"></i></li>
+        <li class="notice-item"><span class="notice-icon green">✓</span><div><strong>Lina Nasser completed Web Dev Course 3</strong><p>Completion score: 92%.</p></div><time>Yesterday</time></li>
+        <li class="notice-item"><span class="notice-icon amber">⏰</span><div><strong>Task deadline approaching: Omar Bakri - Task #5</strong><p>Due in 24 hours.</p></div><time>Yesterday</time></li>
+        <li class="notice-item"><span class="notice-icon red">✗</span><div><strong>Karim Mansour's progress dropped below 50%</strong><p>Recommend escalation check-in.</p></div><time>2 days ago</time></li>
+        <li class="notice-item"><span class="notice-icon cyan">📋</span><div><strong>Weekly report generated</strong><p>Analytics report is ready for export.</p></div><time>2 days ago</time></li>
+        <li class="notice-item"><span class="notice-icon amber">⏰</span><div><strong>New internship request submitted</strong><p>2 new candidates for AI major.</p></div><time>3 days ago</time></li>
+        <li class="notice-item"><span class="notice-icon green">✓</span><div><strong>Dana Yousef finished milestone</strong><p>Cybersecurity module completed.</p></div><time>4 days ago</time></li>
+        <li class="notice-item"><span class="notice-icon red">✗</span><div><strong>System login attempt blocked</strong><p>Suspicious IP flagged.</p></div><time>5 days ago</time></li>
+    </ul>
+    <div class="center"><button class="btn ghost" type="button">Load More</button></div>
+</section>

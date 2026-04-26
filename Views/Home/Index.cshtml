@@ -1,8 +1,297 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    Layout = null;
+    ViewData["Title"] = "InternHub | Intern Management System";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/index.css" />
+  
+</head>
+<body>
+    <nav class="top-nav" id="site-nav">
+        <div class="container nav-shell">
+            <a href="/Home/Index#home" class="brand"><span class="brand-icon">◈</span>InternHub</a>
+            <div class="nav-links">
+                <a href="/Home/Index#home">Home</a>
+                <a href="/Home/About">About Us</a>
+                <a href="/Home/Contact">Contact Us</a>
+            </div>
+            <div class="actions">
+                <a class="btn btn-ghost" href="/Account/Login">Login</a>
+                <a class="btn btn-primary ripple-btn" href="/Account/Signup">Sign Up</a>
+            </div>
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="container drawer" id="mobile-drawer">
+            <div class="nav-links">
+                <a href="/Home/Index#home">Home</a>
+                <a href="/Home/About">About Us</a>
+                <a href="/Home/Contact">Contact Us</a>
+            </div>
+            <div class="actions">
+                <a class="btn btn-ghost" href="/Account/Login">Login</a>
+                <a class="btn btn-primary ripple-btn" href="/Account/Signup">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="mesh"></div>
+            <span class="orb orb-1"></span>
+            <span class="orb orb-2"></span>
+            <span class="orb orb-3"></span>
+            <div class="container hero-grid">
+                <div>
+                    <h1 class="hero-title">
+                        <span class="hero-line">Manage Interns.</span>
+                        <span class="hero-line">Scale Your Team.</span>
+                        <span class="hero-line">Deliver on Time.</span>
+                    </h1>
+                    <p class="hero-sub">
+                        The all-in-one platform for companies to onboard, track, assign tasks, and evaluate interns - built for busy dev teams.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary ripple-btn" href="#cta">Start for Free &#8594;</a>
+                        <a class="btn btn-ghost" href="#testimonials">&#9658; Watch Demo</a>
+                    </div>
+                </div>
+                <article class="dash-card reveal">
+                    <div class="dash-head">
+                        <span>Intern Task Board</span>
+                        <span class="badge">Live Sprint</span>
+                    </div>
+                    <div class="task">
+                        <p class="task-title">API Endpoint Refactor</p>
+                        <div class="task-meta">
+                            <span>Due in 2 days</span>
+                            <span class="badge">High Priority</span>
+                        </div>
+                        <div class="avatars">
+                            <span class="avatar-chip">AL</span>
+                            <span class="avatar-chip">RK</span>
+                            <span class="avatar-chip">NV</span>
+                        </div>
+                        <div class="progress"><span style="width: 72%;"></span></div>
+                    </div>
+                    <div class="task">
+                        <p class="task-title">Onboarding Milestone</p>
+                        <div class="task-meta">
+                            <span>Mentor checklist</span>
+                            <span class="badge" style="color: var(--success); border-color: rgba(5, 150, 105, 0.45); background: rgba(5, 150, 105, 0.12);">On Track</span>
+                        </div>
+                        <div class="progress"><span style="width: 88%;"></span></div>
+                    </div>
+                    <div class="task" style="margin-bottom: 0;">
+                        <p class="task-title">UI Feedback Round</p>
+                        <div class="task-meta">
+                            <span>3 comments pending</span>
+                            <span class="badge">Review</span>
+                        </div>
+                        <div class="progress"><span style="width: 54%;"></span></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="logo-strip reveal" id="aboutus">
+            <div class="container logo-row">
+                <p>Trusted by developers at:</p>
+                <span class="logo">Accenture</span>
+                <span class="logo">DevCorp</span>
+                <span class="logo">TechNova</span>
+                <span class="logo">CodeBase Inc.</span>
+                <span class="logo">Synapse Labs</span>
+                <span class="logo">PixelForge</span>
+            </div>
+        </section>
+
+        <section class="section stats">
+            <div class="container stats-grid reveal" id="stats">
+                <article class="stat-card">
+                    <p class="stat-value" data-counter data-target="2400" data-suffix="+">0+</p>
+                    <p class="stat-label">Interns Managed</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-value" data-counter data-target="98" data-suffix="%">0%</p>
+                    <p class="stat-label">On-Time Delivery</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-value" data-counter data-target="340" data-suffix="+">0+</p>
+                    <p class="stat-label">Companies</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Everything your dev team needs</h2>
+                <p class="section-copy reveal">
+                    InternHub gives engineering managers one reliable command center to coordinate intern work, align mentors, and report progress to leadership.
+                </p>
+                <div class="features-grid">
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">🧩</div>
+                        <h3 class="feature-title">Task Assignment</h3>
+                        <p class="feature-text">Assign dev tasks to interns with deadlines and priority.</p>
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Progress Tracking</h3>
+                        <p class="feature-text">Real-time dashboards to track every intern's progress.</p>
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">⏱</div>
+                        <h3 class="feature-title">Time Management</h3>
+                        <p class="feature-text">Built-in timesheets, schedules, and milestone alerts.</p>
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">✅</div>
+                        <h3 class="feature-title">Evaluation System</h3>
+                        <p class="feature-text">Score performance with structured review templates.</p>
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">💬</div>
+                        <h3 class="feature-title">Team Collaboration</h3>
+                        <p class="feature-text">Comment threads and feedback loops per task.</p>
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Reports and Exports</h3>
+                        <p class="feature-text">Generate PDF and CSV reports for HR and management.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">How InternHub Works</h2>
+                <p class="section-copy reveal">
+                    Set up your internship pipeline once, then let every cohort run through a repeatable process your team can trust.
+                </p>
+                <div class="steps-track stagger">
+                    <article class="step reveal">
+                        <div class="step-num">1</div>
+                        <h3>Post an Internship</h3>
+                        <p>Define role expectations, onboarding checklists, and mentor assignments from day one.</p>
+                    </article>
+                    <article class="step reveal">
+                        <div class="step-num">2</div>
+                        <h3>Assign and Track</h3>
+                        <p>Distribute tasks, monitor delivery pace, and keep interns aligned with sprint goals.</p>
+                    </article>
+                    <article class="step reveal">
+                        <div class="step-num">3</div>
+                        <h3>Evaluate and Report</h3>
+                        <p>Run standardized performance reviews and export outcome reports for leadership and HR.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="testimonials">
+            <div class="container">
+                <h2 class="section-title reveal">What teams are saying</h2>
+                <p class="section-copy reveal">
+                    Engineering teams use InternHub to reduce admin overhead and mentor interns with clarity.
+                </p>
+                <div class="testimonials-grid">
+                    <article class="quote-card reveal">
+                        <p class="quote-mark">&#8220;</p>
+                        <p class="quote-text">InternHub cut our onboarding time in half. Our junior devs finally have a system.</p>
+                        <div class="person">
+                            <span class="person-avatar">RT</span>
+                            <div>
+                                <p>Rami T.</p>
+                                <p class="person-role">Engineering Lead</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="quote-card reveal">
+                        <p class="quote-mark">&#8220;</p>
+                        <p class="quote-text">Tracking intern tasks across squads became simple. Weekly check-ins now take minutes.</p>
+                        <div class="person">
+                            <span class="person-avatar">IM</span>
+                            <div>
+                                <p>Ina M.</p>
+                                <p class="person-role">Developer Experience Manager</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="quote-card reveal">
+                        <p class="quote-mark">&#8220;</p>
+                        <p class="quote-text">Our mentors get better visibility and interns ship confidently before program end.</p>
+                        <div class="person">
+                            <span class="person-avatar">JV</span>
+                            <div>
+                                <p>Jamal V.</p>
+                                <p class="person-role">Head of Product Engineering</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="cta">
+            <div class="container">
+                <div class="cta-banner reveal">
+                    <h2>Ready to streamline your intern program?</h2>
+                    <p>Join 340+ companies already using InternHub.</p>
+                    <a class="btn btn-primary ripple-btn" href="#contact">Get Started Free</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <p class="brand"><span class="brand-icon">◈</span>InternHub</p>
+                <p>Mission control for internship operations built for modern engineering teams.</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Product</h3>
+                <a href="#home">Overview</a>
+                <a href="#stats">Analytics</a>
+                <a href="#cta">Pricing</a>
+                <a href="#cta">Integrations</a>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Company</h3>
+                <a href="#aboutus">About Us</a>
+                <a href="#testimonials">Case Studies</a>
+                <a href="#contact">Careers</a>
+                <a href="#contact">Support</a>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Contact</h3>
+                <p>hello@internhub.dev</p>
+                <p>+1 (415) 555-0918</p>
+                <p>221 Mission Street, San Francisco, CA</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 InternHub. All rights reserved.</p>
+            <div class="socials">
+                <a href="#contact">LinkedIn</a>
+                <a href="#contact">GitHub</a>
+                <a href="#contact">X</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/site.js"></script>
+</body>
+</html>

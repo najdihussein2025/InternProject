@@ -1,0 +1,75 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Dashboard";
+}
+
+@* TODO: replace with Model data *@
+<section class="welcome-bar">
+    <h2>Good morning, @ViewBag.AdminName 👋</h2>
+    <p>Here's what's happening with your intern program today.</p>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <div class="stat-head"><span>Total Interns</span><i class="icon-box purple"></i></div>
+        <h3>47</h3>
+        <p><span class="trend up">↑ 12% this month</span></p>
+    </article>
+    <article class="stat-card warning-left">
+        <div class="stat-head"><span>Pending Approvals</span><i class="icon-box amber"></i></div>
+        <h3>4</h3>
+        <p><span class="trend warn">Awaiting review</span></p>
+    </article>
+    <article class="stat-card">
+        <div class="stat-head"><span>Active Tasks</span><i class="icon-box cyan"></i></div>
+        <h3>29</h3>
+        <p><span class="trend up">↑ 8% this week</span></p>
+    </article>
+    <article class="stat-card">
+        <div class="stat-head"><span>Completion Rate</span><i class="icon-box green"></i></div>
+        <h3>84%</h3>
+        <p><span class="trend up">↑ 3% vs last cohort</span></p>
+    </article>
+</section>
+
+<section class="charts-row">
+    <article class="card">
+        <h3>Interns per Major</h3>
+        <div class="bar-row"><span>Web</span><div class="bar-track"><i style="--w:100%;--c:var(--cyan)"></i></div><b>12</b></div>
+        <div class="bar-row"><span>AI</span><div class="bar-track"><i style="--w:66%;--c:var(--purple)"></i></div><b>8</b></div>
+        <div class="bar-row"><span>Security</span><div class="bar-track"><i style="--w:42%;--c:var(--warning)"></i></div><b>5</b></div>
+        <div class="bar-row"><span>Data</span><div class="bar-track"><i style="--w:58%;--c:var(--green)"></i></div><b>7</b></div>
+    </article>
+    <article class="card">
+        <h3>Task Status</h3>
+        <div class="donut"></div>
+        <ul class="legend">
+            <li><span class="dot green"></span>Completed 58%</li>
+            <li><span class="dot cyan"></span>In Progress 27%</li>
+            <li><span class="dot slate"></span>Not Started 15%</li>
+        </ul>
+    </article>
+</section>
+
+<section class="bottom-row">
+    <article class="card">
+        <h3>Recent Activity</h3>
+        <ul class="activity-list">
+            <li><span class="dot green"></span><p>Sara Ahmed was approved for Web Development</p><time>2h ago</time></li>
+            <li><span class="dot amber"></span><p>Omar Bakri applied for AI major</p><time>4h ago</time></li>
+            <li><span class="dot cyan"></span><p>Lina Nasser submitted Task #3</p><time>5h ago</time></li>
+            <li><span class="dot red"></span><p>Application from Khaled M. was rejected</p><time>Yesterday</time></li>
+            <li><span class="dot green"></span><p>Karim Mansour completed Course 2</p><time>Yesterday</time></li>
+            <li><span class="dot amber"></span><p>New application from Rania S.</p><time>2 days ago</time></li>
+        </ul>
+    </article>
+    <article class="card">
+        <h3>Quick Actions</h3>
+        <div class="quick-actions">
+            <a href="@Url.Action("Majors", "Admin")">＋ Add New Major</a>
+            <a href="@Url.Action("Courses", "Admin")">＋ Add New Course</a>
+            <a href="@Url.Action("Applications", "Admin")">👥 Review Applications</a>
+            <a href="@Url.Action("Reports", "Admin")">📈 View Reports</a>
+        </div>
+    </article>
+</section>

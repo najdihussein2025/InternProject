@@ -1,0 +1,31 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Majors";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <h2>Majors</h2>
+    <button class="btn cyan" type="button" data-open-modal="majorModal">＋ Add Major</button>
+</section>
+
+<section class="cards-grid major-grid">
+    <article class="major-card"><i class="major-top cyan"></i><div class="major-head"><h3>Web Development <span class="pill green-soft">Active</span></h3></div><div class="triple-stats"><div><small>Interns</small><strong>8</strong></div><div><small>Max</small><strong>12</strong></div><div><small>Tasks</small><strong>6</strong></div></div><div class="capacity"><p><span>Capacity</span><b>8 / 12</b></p><div class="progress-line web"><i style="--w:67%"></i></div></div><div class="task-flow"><h4>Task Flow <button class="btn ghost sm" type="button">＋ Add Task</button></h4><p>⠿ 01 - Setup &nbsp; <span class="pill">2 weeks</span></p><p>⠿ 02 - MVC Basics &nbsp; <span class="pill">2 weeks</span></p><small>Drag to reorder</small></div><div class="linked-courses"><h4>Linked Courses</h4><p>📚 ASP.NET Core <span class="pill green-soft">Required</span></p></div><a href="@Url.Action("Users","Admin")">View All Interns in Major →</a></article>
+    <article class="major-card"><i class="major-top purple"></i><div class="major-head"><h3>Artificial Intelligence <span class="pill green-soft">Active</span></h3></div><div class="triple-stats"><div><small>Interns</small><strong>5</strong></div><div><small>Max</small><strong>8</strong></div><div><small>Tasks</small><strong>8</strong></div></div><div class="capacity"><p><span>Capacity</span><b>5 / 8</b></p><div class="progress-line ai"><i style="--w:62%"></i></div></div><div class="task-flow"><h4>Task Flow</h4><p>⠿ 01 - ML Foundations <span class="pill">2 weeks</span></p></div><div class="linked-courses"><h4>Linked Courses</h4><p>📚 Python for ML <span class="pill green-soft">Required</span></p></div><a href="@Url.Action("Users","Admin")">View All Interns in Major →</a></article>
+    <article class="major-card"><i class="major-top amber"></i><div class="major-head"><h3>Cybersecurity <span class="pill green-soft">Active</span></h3></div><div class="triple-stats"><div><small>Interns</small><strong>3</strong></div><div><small>Max</small><strong>6</strong></div><div><small>Tasks</small><strong>5</strong></div></div><div class="capacity"><p><span>Capacity</span><b>3 / 6</b></p><div class="progress-line sec"><i style="--w:50%"></i></div></div><a href="@Url.Action("Users","Admin")">View All Interns in Major →</a></article>
+    <article class="major-card"><i class="major-top green"></i><div class="major-head"><h3>Data Engineering <span class="pill green-soft">Active</span></h3></div><div class="triple-stats"><div><small>Interns</small><strong>4</strong></div><div><small>Max</small><strong>10</strong></div><div><small>Tasks</small><strong>7</strong></div></div><div class="capacity"><p><span>Capacity</span><b>4 / 10</b></p><div class="progress-line data"><i style="--w:40%"></i></div></div><a href="@Url.Action("Users","Admin")">View All Interns in Major →</a></article>
+</section>
+
+<div class="modal-overlay" id="majorModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+        <h3>Add Major</h3>
+        <form method="post" action="@Url.Action("AddMajor", "Admin")">
+            @Html.AntiForgeryToken()
+            <label>Major Name <input name="name" /></label>
+            <label>Description <textarea name="description" rows="3"></textarea></label>
+            <label>Color Theme <select name="colorTheme"><option>Cyan</option><option>Purple</option><option>Amber</option><option>Green</option></select></label>
+            <label>Max Interns <input name="maxInterns" type="number" /></label>
+            <label class="switch-row">Status <input name="isActive" type="checkbox" /> <span>Active</span></label>
+            <div class="modal-actions"><button class="btn cyan" type="submit">Create Major</button><button class="btn ghost" type="button" data-close-modal>Cancel</button></div>
+        </form>
+    </div>
+</div>

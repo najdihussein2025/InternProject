@@ -1,0 +1,30 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Settings";
+}
+<section class="student-settings-wrap">
+    <form class="student-settings-card student-panel" action="@Url.Action("Settings", "Student")" method="get">
+        <h3>Change Password</h3>
+        <p>Password must be at least 8 characters</p>
+
+        <label for="studentCurrentPwd">Current Password</label>
+        <div class="student-pwd-wrap">
+            <input id="studentCurrentPwd" type="password" />
+            <button type="button" data-password-toggle aria-label="Show password">👁</button>
+        </div>
+
+        <label for="studentNewPwd">New Password</label>
+        <div class="student-pwd-wrap">
+            <input id="studentNewPwd" type="password" />
+            <button type="button" data-password-toggle aria-label="Show password">👁</button>
+        </div>
+
+        <label for="studentConfirmPwd">Confirm Password</label>
+        <div class="student-pwd-wrap">
+            <input id="studentConfirmPwd" type="password" />
+            <button type="button" data-password-toggle aria-label="Show password">👁</button>
+        </div>
+
+        <button class="student-btn primary" type="submit">Update Password</button>
+    </form>
+</section>

@@ -1,0 +1,71 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Internship Application";
+}
+<link rel="stylesheet" href="~/css/student.css" asp-append-version="true" />
+
+<section class="student-app-wrap" style="margin-top:2.5rem;">
+    <form class="student-app-card student-panel" data-application-form novalidate>
+        <div class="student-app-header">
+            <h2>Apply for Internship</h2>
+            <p>Complete the form to start your internship journey</p>
+        </div>
+
+        <div class="onboarding-steps">
+            <span class="active">Step 1: Apply</span>
+            <span>Step 2: Review</span>
+            <span>Step 3: Start Internship</span>
+        </div>
+
+        <div class="student-app-grid">
+            <div>
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input id="fullName" name="fullName" type="text" required />
+            </div>
+            <div>
+                <label for="age">Age <span class="required">*</span></label>
+                <input id="age" name="age" type="number" min="16" required />
+            </div>
+            <div>
+                <label for="email">Email <span class="required">*</span></label>
+                <input id="email" name="email" type="email" required />
+            </div>
+            <div>
+                <label for="major">Major <span class="required">*</span></label>
+                <select id="major" name="major" required>
+                    <option value="">-- Select Major --</option>
+                    <option>Web Development</option>
+                    <option>Cyber Security</option>
+                    <option>AI</option>
+                    <option>Data Science</option>
+                </select>
+            </div>
+            <div>
+                <label for="skills">Skills <span class="required">*</span></label>
+                <input id="skills" name="skills" type="text" placeholder="e.g. .NET, API, Docker" required />
+            </div>
+            <div>
+                <label for="languages">Programming Languages <span class="required">*</span></label>
+                <input id="languages" name="languages" type="text" placeholder="C#, Python, JavaScript" required />
+            </div>
+        </div>
+
+        <div class="student-app-upload">
+            <div>
+                <label for="projectFile">Upload Projects (file)</label>
+                <input id="projectFile" name="projectFile" type="file" />
+            </div>
+            <div>
+                <label for="projectUrl">Project URL (GitHub / Portfolio)</label>
+                <input id="projectUrl" name="projectUrl" type="url" placeholder="https://github.com/username/project" />
+            </div>
+        </div>
+
+        <p class="student-app-note">Your application will be reviewed by admin before access is granted.</p>
+        <button class="student-btn primary student-app-submit" type="submit">Submit Application</button>
+    </form>
+</section>
+
+@section Scripts {
+    <script src="~/js/student.js" asp-append-version="true"></script>
+}

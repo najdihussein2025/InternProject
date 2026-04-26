@@ -1,0 +1,158 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Sign Up";
+}
+<link rel="stylesheet" href="~/css/auth.css" />
+
+<section class="auth-page">
+    <div class="auth-split">
+        <aside class="auth-brand-panel">
+            <div class="auth-orb orb-a"></div>
+            <div class="auth-orb orb-b"></div>
+            <div class="auth-brand-top">
+                <div class="auth-logo">
+                    <span class="auth-logo-box">IH</span>
+                    <h2>InternHub</h2>
+                </div>
+                <p class="auth-tagline">Intern Management, Simplified.</p>
+            </div>
+
+            <article class="visual-card">
+                <p class="visual-head">Program Launch Board</p>
+                <div class="visual-row">
+                    <span class="avatar">AN</span>
+                    <div class="row-copy">
+                        <strong>Anika Noor</strong>
+                        <small>Frontend component tasks</small>
+                    </div>
+                    <span class="pill done">Done</span>
+                </div>
+                <div class="bar"><span style="width: 88%"></span></div>
+
+                <div class="visual-row">
+                    <span class="avatar">JM</span>
+                    <div class="row-copy">
+                        <strong>Jamal M.</strong>
+                        <small>Timesheet automation setup</small>
+                    </div>
+                    <span class="pill prog">In Progress</span>
+                </div>
+                <div class="bar"><span style="width: 59%"></span></div>
+
+                <div class="visual-row">
+                    <span class="avatar">PL</span>
+                    <div class="row-copy">
+                        <strong>Priya Lee</strong>
+                        <small>Mentor review workflow</small>
+                    </div>
+                    <span class="pill rev">Review</span>
+                </div>
+                <div class="bar"><span style="width: 44%"></span></div>
+            </article>
+
+            <div class="auth-quote">
+                <p>"The platform that helped us manage 40 interns without losing our minds."</p>
+                <small>- Rami T., Engineering Lead at TechNova</small>
+            </div>
+        </aside>
+
+        <section class="auth-form-panel">
+            <a class="mobile-auth-logo" href="@Url.Action("Index", "Home")"><span>IH</span>InternHub</a>
+
+            <div class="auth-form-wrap">
+                <p class="section-label">GET STARTED</p>
+                <h1>Create your account</h1>
+                <p class="auth-subtext">Set up your company workspace in under 2 minutes.</p>
+
+                <div class="stepper">
+                    <div class="step active"><span>1</span><small>Your Info</small></div>
+                    <div class="step-line"></div>
+                    <div class="step"><span>2</span><small>Company</small></div>
+                    <div class="step-line"></div>
+                    <div class="step"><span>3</span><small>Security</small></div>
+                </div>
+
+                <form asp-action="Signup" asp-controller="Account" method="post" id="signupForm" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="field-grid">
+                        <div class="field">
+                            <label class="form-label">FIRST NAME</label>
+                            <input class="form-input" name="firstName" placeholder="Sara" autocomplete="given-name" />
+                        </div>
+                        <div class="field">
+                            <label class="form-label">LAST NAME</label>
+                            <input class="form-input" name="lastName" placeholder="Ahmed" autocomplete="family-name" />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">WORK EMAIL</label>
+                        <input class="form-input" name="email" type="email" placeholder="sara@yourcompany.com" autocomplete="email" />
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">COMPANY NAME</label>
+                        <input class="form-input" name="companyName" placeholder="TechNova Inc." autocomplete="organization" />
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">YOUR ROLE</label>
+                        <select class="form-input form-select" name="role" autocomplete="organization-title">
+                            <option value="">-- Select your role --</option>
+                            <option>Engineering Lead</option>
+                            <option>HR Manager</option>
+                            <option>CTO / VP Engineering</option>
+                            <option>Recruiter</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">PASSWORD</label>
+                        <div class="input-with-icon">
+                            <input class="form-input password-input" name="password" type="password" autocomplete="new-password" />
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <span class="eye-icon" data-eye></span>
+                            </button>
+                        </div>
+                        <div class="strength-wrap">
+                            <div class="strength-bars" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                            <small class="strength-label">Weak</small>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">CONFIRM PASSWORD</label>
+                        <div class="input-with-icon">
+                            <input class="form-input confirm-password-input" name="confirmPassword" type="password" autocomplete="new-password" />
+                            <span class="match-indicator" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="checkbox-wrap terms-wrap">
+                            <input name="agreeToTerms" type="checkbox" />
+                            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit" data-loading-text="Creating account...">
+                        <span>Create Account →</span>
+                    </button>
+                </form>
+
+                <p class="switch-copy">
+                    Already have an account?
+                    <a href="@Url.Action("Login", "Account")">Sign in →</a>
+                </p>
+                <p class="security-note">🔒 Your data is encrypted and never shared.</p>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/auth.js"></script>
+}

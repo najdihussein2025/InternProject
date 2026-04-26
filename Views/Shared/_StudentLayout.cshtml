@@ -1,0 +1,71 @@
+@{
+    var currentAction = (ViewContext.RouteData.Values["action"]?.ToString() ?? string.Empty).ToLowerInvariant();
+    var pageTitle = ViewBag.PageTitle as string ?? "Student";
+    var studentName = ViewBag.StudentName as string ?? "Student User";
+    var unreadCount = Convert.ToInt32(ViewBag.UnreadCount ?? 0);
+    var initials = string.Join(string.Empty, studentName.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x => x[0])).ToUpperInvariant();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pageTitle - InternHub Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/student.css" asp-append-version="true" />
+</head>
+<body class="student-body">
+    <div class="student-overlay" data-sidebar-overlay></div>
+    <div class="student-shell">
+        <aside class="student-sidebar" id="studentSidebar">
+            <div class="student-brand-wrap">
+                <a class="student-brand" href="@Url.Action("Dashboard", "Student")">
+                    <span class="student-brand-icon">IH</span>
+                    <span class="student-brand-text">InternHub</span>
+                </a>
+                <span class="student-badge">Student Portal</span>
+            </div>
+            <nav class="student-nav">
+                <a class="student-link @(currentAction == "dashboard" ? "active" : string.Empty)" href="@Url.Action("Dashboard", "Student")">Dashboard</a>
+                <a class="student-link @(currentAction == "tasks" ? "active" : string.Empty)" href="@Url.Action("Tasks", "Student")">Tasks</a>
+                <a class="student-link @(currentAction == "projects" ? "active" : string.Empty)" href="@Url.Action("Projects", "Student")">Projects</a>
+                <a class="student-link @(currentAction == "progress" ? "active" : string.Empty)" href="@Url.Action("Progress", "Student")">Progress</a>
+                <a class="student-link @(currentAction == "courses" ? "active" : string.Empty)" href="@Url.Action("Courses", "Student")">Courses</a>
+                <a class="student-link @(currentAction == "settings" ? "active" : string.Empty)" href="@Url.Action("Settings", "Student")">Settings</a>
+            </nav>
+            <div class="student-profile">
+                <span class="student-avatar">@initials</span>
+                <div>
+                    <p>@studentName</p>
+                    <small>Intern</small>
+                </div>
+            </div>
+        </aside>
+
+        <div class="student-main">
+            <header class="student-topbar">
+                <div class="student-top-left">
+                    <button class="student-menu-btn" type="button" data-sidebar-toggle aria-controls="studentSidebar" aria-label="Toggle sidebar">☰</button>
+                    <div>
+                        <h1>@pageTitle</h1>
+                        <p>Student / @pageTitle</p>
+                    </div>
+                </div>
+                <div class="student-top-right">
+                    <input type="search" placeholder="Search..." class="student-search" />
+                    <button class="student-icon-btn" type="button" aria-label="Notifications">🔔@if (unreadCount > 0)
+                        {<span class="student-dot"></span>}</button>
+                    <div class="student-avatar sm">@initials</div>
+                </div>
+            </header>
+            <main class="student-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <script src="~/js/student.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

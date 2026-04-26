@@ -1,0 +1,34 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Dashboard";
+}
+<section class="student-welcome">
+    <h2>Welcome back, Student 👋</h2>
+    <p>Track your internship journey and upcoming deadlines.</p>
+</section>
+
+<section class="student-cards">
+    <article class="student-card"><p>Current Track</p><h3>Web Development</h3></article>
+    <article class="student-card"><p>Progress</p><h3>72%</h3><div class="student-progress"><i style="--w:72%"></i></div></article>
+    <article class="student-card"><p>Tasks Completed</p><h3>18 / 25</h3></article>
+    <article class="student-card"><p>Next Deadline</p><h3>May 12, 2026</h3></article>
+</section>
+
+<section class="student-grid-two">
+    <article class="student-panel">
+        <h3>Recent Tasks</h3>
+        <ul class="student-list">
+            <li><span>API Authentication Task</span><b class="badge pending">Pending</b></li>
+            <li><span>UI Refactor Challenge</span><b class="badge done">Done</b></li>
+            <li><span>Database Practice Sheet</span><b class="badge pending">Pending</b></li>
+            <li><span>Portfolio Setup</span><b class="badge done">Done</b></li>
+        </ul>
+    </article>
+    <article class="student-panel">
+        <h3>Quick Actions</h3>
+        <div class="student-actions">
+            <a href="@Url.Action("Tasks", "Student")">View Tasks</a>
+            <a href="@Url.Action("Projects", "Student")">View Projects</a>
+        </div>
+    </article>
+</section>

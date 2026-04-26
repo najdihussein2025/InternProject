@@ -1,0 +1,26 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Reports";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <h2>Reports &amp; Analytics</h2>
+    <div class="toolbar-actions"><input type="date" /><input type="date" /><button class="btn ghost">Export PDF</button><button class="btn ghost">Export CSV</button></div>
+</section>
+<section class="stats-grid">
+    <article class="stat-card"><div class="stat-head"><span>Total Completions</span></div><h3>132</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>Average Progress</span></div><h3>74%</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>Dropout Rate</span></div><h3>8%</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>Top Major</span></div><h3>Web Dev</h3></article>
+</section>
+<section class="card">
+    <h3>Intern Progress Overview</h3>
+    <div class="table-wrap">
+        <table class="admin-table"><thead><tr><th>Name</th><th>Major</th><th>Courses</th><th>Tasks</th><th>Overall Progress</th><th>Status</th><th>Last Active</th></tr></thead><tbody><tr><td>Sara Ahmed</td><td>Web</td><td>4/5</td><td>6/8</td><td><div class="progress-line web"><i style="--w:82%"></i></div></td><td><span class="pill green-soft">Active</span></td><td>Today</td></tr><tr><td>Omar Bakri</td><td>AI</td><td>2/6</td><td>2/8</td><td><div class="progress-line ai"><i style="--w:36%"></i></div></td><td><span class="pill amber-soft">At Risk</span></td><td>Yesterday</td></tr></tbody></table>
+    </div>
+</section>
+<section class="charts-row">
+    <article class="card"><h3>Top Performing Interns</h3><ol class="rank-list"><li><b>1</b> Sara Ahmed - 94%</li><li><b>2</b> Lina Nasser - 91%</li><li><b>3</b> Karim Mansour - 89%</li><li><b>4</b> Dana Yousef - 84%</li><li><b>5</b> Rania Saleh - 82%</li></ol></article>
+    <article class="card"><h3>Majors Performance</h3><div class="bar-row"><span>Web</span><div class="bar-track"><i style="--w:88%;--c:var(--cyan)"></i></div><b>88%</b></div><div class="bar-row"><span>AI</span><div class="bar-track"><i style="--w:71%;--c:var(--purple)"></i></div><b>71%</b></div><div class="bar-row"><span>Security</span><div class="bar-track"><i style="--w:76%;--c:var(--warning)"></i></div><b>76%</b></div><div class="bar-row"><span>Data</span><div class="bar-track"><i style="--w:80%;--c:var(--green)"></i></div><b>80%</b></div></article>
+</section>
+<section class="card"><h3>Applications Over Time</h3><div class="timeline-bars"><div><span>Nov</span><i style="--a:60%;--b:45%;--c:15%"></i></div><div><span>Dec</span><i style="--a:72%;--b:51%;--c:18%"></i></div><div><span>Jan</span><i style="--a:80%;--b:62%;--c:20%"></i></div><div><span>Feb</span><i style="--a:68%;--b:46%;--c:22%"></i></div><div><span>Mar</span><i style="--a:82%;--b:64%;--c:16%"></i></div><div><span>Apr</span><i style="--a:76%;--b:58%;--c:19%"></i></div></div><p class="legend"><span class="dot cyan"></span>Applications <span class="dot green"></span>Accepted <span class="dot red"></span>Rejected</p></section>

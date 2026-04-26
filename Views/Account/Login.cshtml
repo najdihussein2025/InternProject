@@ -1,0 +1,122 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login";
+}
+<link rel="stylesheet" href="~/css/auth.css" />
+
+<section class="auth-page">
+    <div class="auth-split">
+        <aside class="auth-brand-panel">
+            <div class="auth-orb orb-a"></div>
+            <div class="auth-orb orb-b"></div>
+            <div class="auth-brand-top">
+                <div class="auth-logo">
+                    <span class="auth-logo-box">IH</span>
+                    <h2>InternHub</h2>
+                </div>
+                <p class="auth-tagline">Intern Management, Simplified.</p>
+            </div>
+
+            <article class="visual-card">
+                <p class="visual-head">Live Cohort Snapshot</p>
+                <div class="visual-row">
+                    <span class="avatar">SA</span>
+                    <div class="row-copy">
+                        <strong>Sara Ahmed</strong>
+                        <small>API onboarding checklist</small>
+                    </div>
+                    <span class="pill done">Done</span>
+                </div>
+                <div class="bar"><span style="width: 92%"></span></div>
+
+                <div class="visual-row">
+                    <span class="avatar">DV</span>
+                    <div class="row-copy">
+                        <strong>Dev Verma</strong>
+                        <small>Auth middleware tests</small>
+                    </div>
+                    <span class="pill prog">In Progress</span>
+                </div>
+                <div class="bar"><span style="width: 66%"></span></div>
+
+                <div class="visual-row">
+                    <span class="avatar">LT</span>
+                    <div class="row-copy">
+                        <strong>Lena Torres</strong>
+                        <small>Weekly report export</small>
+                    </div>
+                    <span class="pill rev">Review</span>
+                </div>
+                <div class="bar"><span style="width: 48%"></span></div>
+            </article>
+
+            <div class="auth-quote">
+                <p>"The platform that helped us manage 40 interns without losing our minds."</p>
+                <small>- Rami T., Engineering Lead at TechNova</small>
+            </div>
+        </aside>
+
+        <section class="auth-form-panel">
+            <a class="mobile-auth-logo" href="@Url.Action("Index", "Home")"><span>IH</span>InternHub</a>
+
+            <div class="auth-form-wrap">
+                <p class="section-label">WELCOME BACK</p>
+                <h1>Sign in to InternHub</h1>
+                <p class="auth-subtext">Enter your credentials to access your dashboard.</p>
+
+                <form asp-action="Login" asp-controller="Account" method="post" id="loginForm" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="field">
+                        <label class="form-label">EMAIL ADDRESS</label>
+                        <input class="form-input" name="email" type="email" placeholder="sara@yourcompany.com" autocomplete="email" />
+                    </div>
+
+                    <div class="field">
+                        <label class="form-label">PASSWORD</label>
+                        <div class="input-with-icon">
+                            <input class="form-input password-input" name="password" type="password" autocomplete="current-password" />
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <span class="eye-icon" data-eye></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row-between">
+                        <label class="checkbox-wrap">
+                            <input name="rememberMe" type="checkbox" />
+                            <span>Remember me</span>
+                        </label>
+                        <a class="text-link" href="@Url.Action("ForgotPassword", "Account")">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit" data-loading-text="Signing in...">
+                        <span>Sign In →</span>
+                    </button>
+
+                    <div class="divider"><span>or continue with</span></div>
+
+                    <div class="sso-row">
+                        <button type="button" class="sso-btn">
+                            <span class="sso-icon">G</span>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="sso-btn">
+                            <span class="sso-icon ms">■</span>
+                            <span>Microsoft</span>
+                        </button>
+                    </div>
+                </form>
+
+                <p class="switch-copy">
+                    Don't have an account?
+                    <a href="@Url.Action("Signup", "Account")">Create one free →</a>
+                </p>
+                <p class="security-note">🔒 Your data is encrypted and never shared.</p>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/auth.js"></script>
+}

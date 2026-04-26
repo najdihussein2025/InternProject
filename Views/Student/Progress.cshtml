@@ -1,0 +1,25 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Progress";
+}
+<section class="student-panel progress-main">
+    <h3>Overall Progress</h3>
+    <div class="student-progress-lg">
+        <i style="--w:72%"></i>
+        <span>72%</span>
+    </div>
+    <div class="student-cards compact">
+        <article class="student-card"><p>Completed Tasks</p><h3>18</h3></article>
+        <article class="student-card"><p>Completed Projects</p><h3>4</h3></article>
+        <article class="student-card"><p>Remaining Work</p><h3>7</h3></article>
+    </div>
+</section>
+
+<section class="student-panel">
+    <h3>Performance Snapshot</h3>
+    <div class="student-bars">
+        <div><span>Tasks</span><i style="--w:78%"></i></div>
+        <div><span>Projects</span><i style="--w:66%"></i></div>
+        <div><span>Courses</span><i style="--w:74%"></i></div>
+    </div>
+</section>

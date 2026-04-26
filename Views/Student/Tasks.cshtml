@@ -1,0 +1,18 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Tasks";
+}
+<section class="student-panel">
+    <h3>Task Board</h3>
+    <div class="student-table-wrap">
+        <table class="student-table">
+            <thead><tr><th>Done</th><th>Task Name</th><th>Description</th><th>Deadline</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td><input type="checkbox" /></td><td>Task 1</td><td>Build login UI and validation styles</td><td>2026-05-10</td><td><span class="badge pending">Pending</span></td></tr>
+                <tr><td><input type="checkbox" checked /></td><td>Task 2</td><td>Implement sidebar responsive behavior</td><td>2026-05-04</td><td><span class="badge done">Done</span></td></tr>
+                <tr><td><input type="checkbox" /></td><td>Task 3</td><td>Create project submission card layout</td><td>2026-05-15</td><td><span class="badge pending">Pending</span></td></tr>
+                <tr><td><input type="checkbox" checked /></td><td>Task 4</td><td>Finish profile page component set</td><td>2026-05-01</td><td><span class="badge done">Done</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

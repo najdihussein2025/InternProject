@@ -1,0 +1,50 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Applications";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <h2>Pending Applications <span class="pill amber-soft">4</span></h2>
+    <div class="toolbar-actions"><input type="date" /><input type="search" placeholder="Search applications..." /></div>
+</section>
+
+<section class="cards-grid app-grid">
+    @for (var i = 1; i <= 4; i++)
+    {
+        <article class="card app-card" data-app-card>
+            <div class="app-head"><span class="mini-avatar web">A@i</span><div><strong>Applicant @i</strong><p>applicant@i@mail.com</p></div><time>2026-04-1@i</time></div>
+            <div class="app-major">Applied for:
+                <select name="major"><option>Web Development</option><option>AI</option><option>Cybersecurity</option><option>Data Engineering</option></select>
+            </div>
+            <button class="exp-toggle" type="button" data-exp-toggle>EXPERIENCE &amp; BACKGROUND</button>
+            <div class="exp-panel" data-exp-panel>
+                <p>University: Cairo University | Graduation: 2026</p>
+                <p>Skills: <span class="pill">C#</span> <span class="pill">SQL</span> <span class="pill">React</span></p>
+                <p>GitHub: <a href="@Url.Action("Users","Admin")">github.com/applicant</a></p>
+                <p>Motivated intern with projects in full-stack systems and security assessments.</p>
+            </div>
+            <div class="app-actions">
+                <form method="post" action="@Url.Action("AcceptApplication", "Admin")" class="inline-form">
+                    @Html.AntiForgeryToken()
+                    <input name="id" type="hidden" value="@i" />
+                    <button class="btn success" type="button" data-show-inline="accept">✓ Accept</button>
+                    <div class="inline-panel" data-inline-panel="accept">
+                        <select name="major"><option>Web Development</option><option>AI</option><option>Cybersecurity</option><option>Data Engineering</option></select>
+                        <button class="btn success" type="submit">Confirm Accept</button>
+                    </div>
+                </form>
+                <form method="post" action="@Url.Action("RejectApplication", "Admin")" class="inline-form">
+                    @Html.AntiForgeryToken()
+                    <input name="id" type="hidden" value="@i" />
+                    <button class="btn danger ghost" type="button" data-show-inline="reject">✗ Reject</button>
+                    <div class="inline-panel" data-inline-panel="reject">
+                        <textarea name="reason" rows="2" placeholder="Reason"></textarea>
+                        <button class="btn danger" type="submit">Confirm Reject</button>
+                    </div>
+                </form>
+                <a class="btn ghost" href="@Url.Action("UserDetail", "Admin", new { id = i })">👁 View Full Profile</a>
+            </div>
+        </article>
+    }
+</section>
+

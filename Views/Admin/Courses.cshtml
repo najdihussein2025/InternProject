@@ -1,0 +1,46 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Courses";
+}
+@* TODO: replace with Model data *@
+<section class="page-toolbar">
+    <h2>Courses</h2>
+    <div class="toolbar-actions">
+        <div class="filter-tabs"><button class="active">All</button><button>Web</button><button>AI</button><button>Security</button><button>Data</button></div>
+        <button class="btn cyan" type="button" data-open-modal="courseModal">＋ Add Course</button>
+    </div>
+</section>
+
+<div class="table-wrap">
+    <table class="admin-table">
+        <thead><tr><th>#</th><th>Course Title</th><th>Major</th><th>Type</th><th>Duration</th><th>Required</th><th>Enrolled</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+            <tr><td>01</td><td><strong>ASP.NET Core Basics</strong><small>Learn MVC fundamentals and routing.</small></td><td><span class="pill cyan-soft">Web</span></td><td><span class="pill cyan-soft">Video</span></td><td>3 hours</td><td><label class="toggle"><input checked type="checkbox" /><span></span></label></td><td>12 interns</td><td><span class="pill green-soft">Active</span></td><td class="actions"><a href="@Url.Action("Courses","Admin")">✏️</a><a href="@Url.Action("Courses","Admin")">👁</a><form method="post" action="@Url.Action("DeleteCourse","Admin")" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="1" /><button class="icon-btn-inline" type="submit">🗑</button></form></td></tr>
+            <tr><td>02</td><td><strong>React Essentials</strong><small>Component lifecycle and state management.</small></td><td><span class="pill cyan-soft">Web</span></td><td><span class="pill amber-soft">Reading</span></td><td>5 days</td><td><label class="toggle"><input type="checkbox" /><span></span></label></td><td>9 interns</td><td><span class="pill">Draft</span></td><td class="actions"><a href="@Url.Action("Courses","Admin")">✏️</a><a href="@Url.Action("Courses","Admin")">👁</a><form method="post" action="@Url.Action("DeleteCourse","Admin")" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="2" /><button class="icon-btn-inline" type="submit">🗑</button></form></td></tr>
+            <tr><td>03</td><td><strong>Intro to Machine Learning</strong><small>Supervised and unsupervised learning overview.</small></td><td><span class="pill purple-soft">AI</span></td><td><span class="pill purple-soft">Project</span></td><td>2 weeks</td><td><label class="toggle"><input checked type="checkbox" /><span></span></label></td><td>6 interns</td><td><span class="pill green-soft">Active</span></td><td class="actions"><a href="@Url.Action("Courses","Admin")">✏️</a><a href="@Url.Action("Courses","Admin")">👁</a><form method="post" action="@Url.Action("DeleteCourse","Admin")" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="3" /><button class="icon-btn-inline" type="submit">🗑</button></form></td></tr>
+            <tr><td>04</td><td><strong>Secure Coding Fundamentals</strong><small>Input validation and secure authentication.</small></td><td><span class="pill amber-soft">Security</span></td><td><span class="pill green-soft">Quiz</span></td><td>4 days</td><td><label class="toggle"><input checked type="checkbox" /><span></span></label></td><td>7 interns</td><td><span class="pill green-soft">Active</span></td><td class="actions"><a href="@Url.Action("Courses","Admin")">✏️</a><a href="@Url.Action("Courses","Admin")">👁</a><form method="post" action="@Url.Action("DeleteCourse","Admin")" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="4" /><button class="icon-btn-inline" type="submit">🗑</button></form></td></tr>
+            <tr><td>05</td><td><strong>Data Pipelines</strong><small>Build ETL flows and monitoring.</small></td><td><span class="pill green-soft">Data</span></td><td><span class="pill cyan-soft">Video</span></td><td>6 hours</td><td><label class="toggle"><input type="checkbox" /><span></span></label></td><td>4 interns</td><td><span class="pill">Draft</span></td><td class="actions"><a href="@Url.Action("Courses","Admin")">✏️</a><a href="@Url.Action("Courses","Admin")">👁</a><form method="post" action="@Url.Action("DeleteCourse","Admin")" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="5" /><button class="icon-btn-inline" type="submit">🗑</button></form></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-overlay" id="courseModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+        <h3>Add Course</h3>
+        <form method="post" action="@Url.Action("AddCourse", "Admin")">
+            @Html.AntiForgeryToken()
+            <label>Course Title <input name="title" /></label>
+            <label>Description <textarea name="description" rows="3"></textarea></label>
+            <label>Major <select name="major"><option>Web Development</option><option>AI</option><option>Cybersecurity</option><option>Data Engineering</option></select></label>
+            <label>Course Type <select name="type"><option>Video</option><option>Reading</option><option>Project</option><option>Quiz</option></select></label>
+            <div class="split">
+                <label>Duration <input name="durationValue" /></label>
+                <label>Unit <select name="durationUnit"><option>hours</option><option>days</option><option>weeks</option></select></label>
+            </div>
+            <label>External URL <input name="externalUrl" /></label>
+            <label class="switch-row">Required <input name="isRequired" type="checkbox" /></label>
+            <label>Sequence <input name="sequence" type="number" /></label>
+            <div class="modal-actions"><button class="btn cyan" type="submit">Create Course</button><button class="btn ghost" type="button" data-close-modal>Cancel</button></div>
+        </form>
+    </div>
+</div>
