@@ -4,7 +4,7 @@ public class Major
     public string Name { get; set; } = string.Empty;       
     public string Duration { get; set; } = "3 Months";
     public string? Description { get; set; }
-    public string ThemeColor { get; set; } = "Cyan";       
+    public string ThemeColor { get; set; } = "Cyan";
     public int MaxInterns { get; set; } = 30;
 
     // Navigation

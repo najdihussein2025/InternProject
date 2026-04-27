@@ -72,7 +72,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Applications", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject", b =>
@@ -108,7 +108,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("MajorId");
 
-                    b.ToTable("FinalProjects");
+                    b.ToTable("FinalProjects", (string)null);
                 });
 
             modelBuilder.Entity("InternTask", b =>
@@ -145,7 +145,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("MajorId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("Major", b =>
@@ -163,9 +163,6 @@ namespace InternSystemProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaxInterns")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -176,7 +173,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Majors");
+                    b.ToTable("Majors", (string)null);
                 });
 
             modelBuilder.Entity("Notification", b =>
@@ -204,7 +201,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("Project", b =>
@@ -233,7 +230,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("MajorId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("StudentFinalProject", b =>
@@ -269,7 +266,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("StudentFinalProjects");
+                    b.ToTable("StudentFinalProjects", (string)null);
                 });
 
             modelBuilder.Entity("StudentProject", b =>
@@ -299,7 +296,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("StudentProjects");
+                    b.ToTable("StudentProjects", (string)null);
                 });
 
             modelBuilder.Entity("StudentTask", b =>
@@ -335,7 +332,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("StudentTasks");
+                    b.ToTable("StudentTasks", (string)null);
                 });
 
             modelBuilder.Entity("User", b =>
@@ -391,7 +388,7 @@ namespace InternSystemProject.Migrations
 
                     b.HasIndex("MajorId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Application", b =>

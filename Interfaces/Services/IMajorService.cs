@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 namespace InternSystemProject.Interfaces.Services;
 
 using System.Threading.Tasks;

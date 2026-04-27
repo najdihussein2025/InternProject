@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace InternSystemProject.Interfaces.Repositories;
 
 using InternSystemProject.Models;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 public interface IUserRepository
 {
     Task<User?> GetByEmailAsync(string email);
@@ -15,9 +15,6 @@ public interface IUserRepository
     Task UpdateStatusAsync(int id, string status);
     Task<List<User>> GetAllUsersAsync();
     Task CreateAsync(User user);
-<<<<<<< HEAD
     Task<List<User>> GetByNameAsync(string name);
-=======
     Task AssignMajorAsync(int userId, int majorId);
->>>>>>> 9269a7e (Added Application Logic for Interns)
 }

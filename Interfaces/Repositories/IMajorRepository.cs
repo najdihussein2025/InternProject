@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 namespace InternSystemProject.Interfaces.Repositories;
 
 using InternSystemProject.DTOs.Major;
