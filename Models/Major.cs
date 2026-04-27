@@ -8,7 +8,7 @@ public class Major
 
     // Navigation
     public ICollection<User> Users { get; set; } = new List<User>();
-    public ICollection<Task> Tasks { get; set; } = new List<Task>();
+    public ICollection<InternTask> Tasks { get; set; } = new List<InternTask>();
     public ICollection<Project> Projects { get; set; } = new List<Project>();
     public ICollection<FinalProject> FinalProjects { get; set; } = new List<FinalProject>();
     public ICollection<Application> AppliedApplications { get; set; } = new List<Application>();

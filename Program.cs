@@ -31,37 +31,17 @@ builder.Services.AddHttpContextAccessor();
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // REPOSITORIES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
-builder.Services.AddScoped<IMajorRepository, MajorRepository>();
-builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-builder.Services.AddScoped<IStudentTaskRepository, StudentTaskRepository>();
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-builder.Services.AddScoped<IStudentProjectRepository, StudentProjectRepository>();
-builder.Services.AddScoped<IFinalProjectRepository, FinalProjectRepository>();
-builder.Services.AddScoped<IStudentFinalProjectRepository, StudentFinalProjectRepository>();
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // SERVICES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IApplicationService, ApplicationService>();
-builder.Services.AddScoped<IMajorService, MajorService>();
-builder.Services.AddScoped<ITaskService, TaskService>();
-builder.Services.AddScoped<IStudentTaskService, StudentTaskService>();
-builder.Services.AddScoped<IProjectService, ProjectService>();
-builder.Services.AddScoped<IStudentProjectService, StudentProjectService>();
-builder.Services.AddScoped<IFinalProjectService, FinalProjectService>();
-builder.Services.AddScoped<IStudentFinalProjectService, StudentFinalProjectService>();
-builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // HELPERS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<SessionHelper>();
-builder.Services.AddScoped<NotificationHelper>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // MVC

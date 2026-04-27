@@ -1,6 +1,7 @@
+@model InternSystemProject.DTOs.User.CreateUserDto
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Sign Up";
+    ViewData["Title"] = "Register";
 }
 <link rel="stylesheet" href="~/css/auth.css" />
 
@@ -72,70 +73,38 @@
                     <div class="step"><span>3</span><small>Security</small></div>
                 </div>
 
-                <form asp-action="Signup" asp-controller="Account" method="post" id="signupForm" novalidate>
+                <form asp-action="Register" asp-controller="Auth" method="post">
                     @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="field-error"></div>
+
                     <div class="field-grid">
                         <div class="field">
                             <label class="form-label">FIRST NAME</label>
-                            <input class="form-input" name="firstName" placeholder="Sara" autocomplete="given-name" />
+                            <input asp-for="FirstName" class="form-input" placeholder="Sara" autocomplete="given-name" />
+                            <span asp-validation-for="FirstName" class="field-error"></span>
                         </div>
                         <div class="field">
                             <label class="form-label">LAST NAME</label>
-                            <input class="form-input" name="lastName" placeholder="Ahmed" autocomplete="family-name" />
+                            <input asp-for="LastName" class="form-input" placeholder="Ahmed" autocomplete="family-name" />
+                            <span asp-validation-for="LastName" class="field-error"></span>
                         </div>
                     </div>
 
                     <div class="field">
                         <label class="form-label">WORK EMAIL</label>
-                        <input class="form-input" name="email" type="email" placeholder="sara@yourcompany.com" autocomplete="email" />
-                    </div>
-
-                    <div class="field">
-                        <label class="form-label">COMPANY NAME</label>
-                        <input class="form-input" name="companyName" placeholder="TechNova Inc." autocomplete="organization" />
-                    </div>
-
-                    <div class="field">
-                        <label class="form-label">YOUR ROLE</label>
-                        <select class="form-input form-select" name="role" autocomplete="organization-title">
-                            <option value="">-- Select your role --</option>
-                            <option>Engineering Lead</option>
-                            <option>HR Manager</option>
-                            <option>CTO / VP Engineering</option>
-                            <option>Recruiter</option>
-                            <option>Other</option>
-                        </select>
+                        <input asp-for="Email" class="form-input" placeholder="sara@company.com" autocomplete="email" />
+                        <span asp-validation-for="Email" class="field-error"></span>
                     </div>
 
                     <div class="field">
                         <label class="form-label">PASSWORD</label>
                         <div class="input-with-icon">
-                            <input class="form-input password-input" name="password" type="password" autocomplete="new-password" />
+                            <input asp-for="Password" class="form-input password-input" type="password" autocomplete="new-password" />
                             <button type="button" class="toggle-password" aria-label="Toggle password visibility">
                                 <span class="eye-icon" data-eye></span>
                             </button>
                         </div>
-                        <div class="strength-wrap">
-                            <div class="strength-bars" aria-hidden="true">
-                                <span></span><span></span><span></span><span></span>
-                            </div>
-                            <small class="strength-label">Weak</small>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="form-label">CONFIRM PASSWORD</label>
-                        <div class="input-with-icon">
-                            <input class="form-input confirm-password-input" name="confirmPassword" type="password" autocomplete="new-password" />
-                            <span class="match-indicator" aria-hidden="true"></span>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="checkbox-wrap terms-wrap">
-                            <input name="agreeToTerms" type="checkbox" />
-                            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
-                        </label>
+                        <span asp-validation-for="Password" class="field-error"></span>
                     </div>
 
                     <button type="submit" class="btn-submit" data-loading-text="Creating account...">
@@ -145,7 +114,7 @@
 
                 <p class="switch-copy">
                     Already have an account?
-                    <a href="@Url.Action("Login", "Account")">Sign in →</a>
+                    <a href="@Url.Action("Login", "Auth")">Sign in →</a>
                 </p>
                 <p class="security-note">🔒 Your data is encrypted and never shared.</p>
             </div>
@@ -154,5 +123,5 @@
 </section>
 
 @section Scripts {
-    <script src="~/js/auth.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

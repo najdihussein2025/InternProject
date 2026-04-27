@@ -10,5 +10,5 @@ public class StudentTask
     public int TaskId { get; set; }
 
     public User User { get; set; } = null!;
-    public Task Task { get; set; } = null!;
+    public InternTask Task { get; set; } = null!;
 }

@@ -1,219 +1,236 @@
+namespace InternSystemProject.Controllers;
+
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using InternSystemProject.Helpers;
+using InternSystemProject.Interfaces.Services;
 
-namespace InternSystemProject.Controllers
+public class AdminController : BaseController
 {
-    public class AdminController : Controller
+    private readonly IUserService _userService;
+
+    public AdminController(IUserService userService, SessionHelper session)
+        : base(session)
     {
-        [HttpGet]
-        public IActionResult Dashboard()
-        {
-            SetSharedViewBags("Dashboard");
-            return View();
-        }
+        _userService = userService;
+    }
 
-        [HttpGet]
-        public IActionResult Users()
-        {
-            SetSharedViewBags("Users");
-            return View();
-        }
+    // ── DASHBOARD ────────────────────────────────
 
-        [HttpGet]
-        public IActionResult Applications()
-        {
-            SetSharedViewBags("Applications");
-            return View();
-        }
+    [HttpGet]
+    public IActionResult Dashboard()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult AcceptedInterns()
-        {
-            SetSharedViewBags("Accepted Interns");
-            return View();
-        }
+        ViewBag.PageTitle = "Dashboard";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Archived()
-        {
-            SetSharedViewBags("Archived");
-            return View();
-        }
+    [HttpGet]
+    public IActionResult AcceptedInterns()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AcceptApplication(int id, string major)
-        {
-            if (id <= 0 || string.IsNullOrWhiteSpace(major))
-            {
-                TempData["Error"] = "Unable to accept application. Please select a valid major.";
-                return RedirectToAction(nameof(Applications));
-            }
+        ViewBag.PageTitle = "Accepted Interns";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-            TempData["Success"] = $"Application #{id} accepted and assigned to {major}.";
-            return RedirectToAction(nameof(Applications));
-        }
+    [HttpGet]
+    public IActionResult Archived()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult RejectApplication(int id, string reason)
-        {
-            if (id <= 0 || string.IsNullOrWhiteSpace(reason))
-            {
-                TempData["Error"] = "Please provide a rejection reason before submitting.";
-                return RedirectToAction(nameof(Applications));
-            }
+        ViewBag.PageTitle = "Archived";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-            TempData["Success"] = $"Application #{id} was rejected successfully.";
-            return RedirectToAction(nameof(Applications));
-        }
+    [HttpGet]
+    public IActionResult Users()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult Majors()
-        {
-            SetSharedViewBags("Majors");
-            return View();
-        }
+        ViewBag.PageTitle = "Users";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult MajorDetails(int id = 1)
-        {
-            SetSharedViewBags("Major Details");
-            ViewBag.MajorId = id;
-            return View();
-        }
+    [HttpGet]
+    public IActionResult Majors()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult MajorInterns(int id = 1)
-        {
-            SetSharedViewBags("Major Interns");
-            ViewBag.MajorId = id;
-            return View();
-        }
+        ViewBag.PageTitle = "Majors";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Tasks()
-        {
-            SetSharedViewBags("Tasks");
-            return View();
-        }
+    [HttpGet]
+    public IActionResult MajorDetails(int id)
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult FinalProjects()
-        {
-            SetSharedViewBags("Final Projects");
-            return View();
-        }
+        ViewBag.PageTitle = "Major Details";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        ViewBag.MajorId = id;
+        return View();
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddMajor()
-        {
-            TempData["Success"] = "Major created successfully.";
-            return RedirectToAction(nameof(Majors));
-        }
+    [HttpGet]
+    public IActionResult Tasks()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteMajor(int id)
-        {
-            if (id <= 0)
-            {
-                TempData["Error"] = "Invalid major selection.";
-                return RedirectToAction(nameof(Majors));
-            }
+        ViewBag.PageTitle = "Tasks";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-            TempData["Success"] = "Major deleted successfully.";
-            return RedirectToAction(nameof(Majors));
-        }
+    [HttpGet]
+    public IActionResult FinalProjects()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult ProgressTracking()
-        {
-            SetSharedViewBags("Progress Tracking");
-            return View();
-        }
+        ViewBag.PageTitle = "Final Projects";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Reports()
-        {
-            SetSharedViewBags("Reports");
-            return View();
-        }
+    [HttpGet]
+    public IActionResult Reports()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult Notifications()
-        {
-            SetSharedViewBags("Notifications");
-            return View();
-        }
+        ViewBag.PageTitle = "Reports";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult MarkAllRead()
-        {
-            TempData["Success"] = "All notifications marked as read.";
-            return RedirectToAction(nameof(Notifications));
-        }
+    [HttpGet]
+    public IActionResult Settings()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult Settings()
-        {
-            SetSharedViewBags("Settings");
-            return View();
-        }
+        ViewBag.PageTitle = "Settings";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SaveProfile()
-        {
-            TempData["Success"] = "Profile updated successfully.";
-            return RedirectToAction(nameof(Settings));
-        }
+    [HttpGet]
+    public IActionResult ProgressTracking()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult ChangePassword()
-        {
-            TempData["Success"] = "Password updated successfully.";
-            return RedirectToAction(nameof(Settings));
-        }
+        ViewBag.PageTitle = "Progress Tracking";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SaveCompany()
-        {
-            TempData["Success"] = "Company information saved.";
-            return RedirectToAction(nameof(Settings));
-        }
+    [HttpGet]
+    public IActionResult Notifications()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SaveNotificationPrefs()
-        {
-            TempData["Success"] = "Notification preferences updated.";
-            return RedirectToAction(nameof(Settings));
-        }
+        ViewBag.PageTitle = "Notifications";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult UserDetail(int id)
-        {
-            return RedirectToAction(nameof(UserDetails), new { id });
-        }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult MarkAllRead()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
 
-        [HttpGet]
-        public IActionResult UserDetails(int id = 1)
-        {
-            SetSharedViewBags("User Details");
-            ViewBag.UserId = id;
-            return View();
-        }
+        TempData["Success"] = "All notifications marked as read.";
+        return RedirectToAction("Notifications");
+    }
 
-        private void SetSharedViewBags(string pageTitle)
-        {
-            ViewBag.PageTitle = pageTitle;
-            ViewBag.AdminName = "Maya Hassan";
-            ViewBag.PendingCount = 4;
-            ViewBag.UnreadCount = 3;
-        }
+    [HttpGet]
+    public IActionResult UserDetails(int id)
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
+
+        ViewBag.PageTitle = "User Details";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        ViewBag.UserId = id;
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult MajorInterns(int id)
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
+
+        ViewBag.PageTitle = "Major Interns";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+        ViewBag.MajorId = id;
+        return View();
+    }
+
+    // ── APPLICATIONS (approve/reject) ────────────
+
+    [HttpGet]
+    public async Task<IActionResult> Applications()
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
+
+        ViewBag.PageTitle = "Applications";
+        ViewBag.AdminName = _session.GetCurrentUserName();
+
+        var pending = await _userService.GetPendingUsersAsync();
+        return View(pending);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ApproveUser(int id)
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
+
+        var (success, error) = await _userService.ApproveUserAsync(id);
+
+        if (success)
+            TempData["Success"] = "Intern approved successfully.";
+        else
+            TempData["Error"] = error;
+
+        return RedirectToAction("Applications");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RejectUser(int id)
+    {
+        var auth = RequireAdmin();
+        if (auth != null) return auth;
+
+        var (success, error) = await _userService.RejectUserAsync(id);
+
+        if (success)
+            TempData["Success"] = "Intern rejected.";
+        else
+            TempData["Error"] = error;
+
+        return RedirectToAction("Applications");
     }
 }

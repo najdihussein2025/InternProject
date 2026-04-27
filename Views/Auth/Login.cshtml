@@ -58,7 +58,7 @@
         </aside>
 
         <section class="auth-form-panel">
-            <a class="mobile-auth-logo" href="@Url.Action("Index", "Home")"><span>IH</span>InternHub</a>
+            <a class="mobile-auth-logo" asp-controller="Home" asp-action="Index"><span>IH</span>InternHub</a>
 
             <div class="auth-form-wrap">
                 <p class="section-label">WELCOME BACK</p>
@@ -98,7 +98,7 @@
                     </div>
 
                     <button type="submit" class="btn-submit" data-loading-text="Signing in...">
-                        <span>Sign In →</span>
+                        <span>Sign In -></span>
                     </button>
 
                     <div class="divider"><span>or continue with</span></div>
@@ -117,9 +117,9 @@
 
                 <p class="switch-copy">
                     Don't have an account?
-                    <a href="@Url.Action("Register", "Auth")">Create one free →</a>
+                    <a asp-controller="Auth" asp-action="Register">Create one free -></a>
                 </p>
-                <p class="security-note">🔒 Your data is encrypted and never shared.</p>
+                <p class="security-note">Your data is encrypted and never shared.</p>
             </div>
         </section>
     </div>

@@ -6,22 +6,19 @@ using InternSystemProject.DTOs.User;
 using InternSystemProject.Helpers;
 using InternSystemProject.Interfaces.Services;
 
-public class AccountController : BaseController
+public class AuthController : BaseController
 {
     private readonly IUserService _userService;
 
-    public AccountController(IUserService userService, SessionHelper session)
+    public AuthController(IUserService userService, SessionHelper session)
         : base(session)
     {
         _userService = userService;
     }
 
-    // ── REGISTER 
-
     [HttpGet]
     public IActionResult Register()
     {
- 
         if (_session.IsLoggedIn())
             return RedirectToDashboard(_session.GetCurrentUserRole());
 
@@ -47,12 +44,9 @@ public class AccountController : BaseController
         return RedirectToAction("Login");
     }
 
-    // ── LOGIN 
-
     [HttpGet]
     public IActionResult Login()
     {
-
         if (_session.IsLoggedIn())
             return RedirectToDashboard(_session.GetCurrentUserRole());
 
@@ -77,17 +71,20 @@ public class AccountController : BaseController
         return RedirectToDashboard(role);
     }
 
-    // ── LOGOUT 
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
+    [HttpGet]
     public IActionResult Logout()
     {
         _session.Clear();
         return RedirectToAction("Index", "Home");
     }
 
-    // ── PRIVATE HELPER ───────────────────────────
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult LogoutPost()
+    {
+        _session.Clear();
+        return RedirectToAction("Index", "Home");
+    }
 
     private IActionResult RedirectToDashboard(string? role)
     {

@@ -10,7 +10,7 @@ namespace InternSystemProject.Data
         }
     public DbSet<User> Users { get; set; }
     public DbSet<Major> Majors { get; set; }
-    public DbSet<Task> Tasks { get; set; }
+    public DbSet<InternTask> Tasks { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<FinalProject> FinalProjects { get; set; }
     public DbSet<StudentTask> StudentTasks { get; set; }
