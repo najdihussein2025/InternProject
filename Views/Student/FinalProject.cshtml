@@ -1,0 +1,35 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Final Project";
+}
+
+<section class="student-panel">
+    <h3>Final Project: Internship Management Platform</h3>
+    <p>Build a complete platform with student and admin modules, task workflows, progress analytics, and secure authentication.</p>
+    <div class="student-cards compact">
+        <article class="student-card"><p>Status</p><h3>In Progress</h3></article>
+        <article class="student-card"><p>Deadline</p><h3>2026-06-20</h3></article>
+        <article class="student-card"><p>Completion</p><h3>52%</h3><div class="student-progress"><i style="--w:52%"></i></div></article>
+    </div>
+</section>
+
+<section class="student-grid-two">
+    <article class="student-panel">
+        <h3>Project Requirements</h3>
+        <ul class="student-list">
+            <li><span>Admin dashboard with recruitment and programs flow</span><b class="badge done">Done</b></li>
+            <li><span>Student dashboard with tasks and progress tracking</span><b class="badge pending">In Progress</b></li>
+            <li><span>Final report and presentation slides</span><b class="badge pending">Pending</b></li>
+            <li><span>GitHub repository and deployment demo</span><b class="badge pending">Pending</b></li>
+        </ul>
+    </article>
+    <article class="student-panel">
+        <h3>Submission</h3>
+        <p>Upload your final deliverables before the deadline. This page is UI-only and ready for backend connection.</p>
+        <div class="student-actions">
+            <button class="student-btn">Upload Source Code</button>
+            <button class="student-btn">Upload Presentation</button>
+            <button class="student-btn primary">Submit Final Project</button>
+        </div>
+    </article>
+</section>

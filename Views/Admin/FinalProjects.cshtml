@@ -1,0 +1,48 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Final Projects";
+}
+
+<section class="page-toolbar">
+    <h2>Final Projects</h2>
+    <div class="toolbar-actions">
+        <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
+        <button class="btn primary-add" type="button" data-open-modal="finalProjectModal"><span class="plus-icon">+</span> Add Final Project</button>
+    </div>
+</section>
+
+<section class="cards-grid major-program-grid">
+    <article class="card final-project-card">
+        <h3>Web Development Capstone</h3>
+        <p>Build a full internship portal with role-based dashboards, task flows, and deployment.</p>
+        <div class="final-project-grid">
+            <div><small>Major</small><strong>Web Dev</strong></div>
+            <div><small>Duration</small><strong>2 Weeks</strong></div>
+            <div><small>Mode</small><strong>Team of 3</strong></div>
+            <div><small>Status</small><strong>Active</strong></div>
+        </div>
+    </article>
+    <article class="card final-project-card">
+        <h3>AI Model Delivery Challenge</h3>
+        <p>Design an end-to-end ML workflow including preprocessing, training, and reporting dashboard.</p>
+        <div class="final-project-grid">
+            <div><small>Major</small><strong>AI</strong></div>
+            <div><small>Duration</small><strong>2 Weeks</strong></div>
+            <div><small>Mode</small><strong>Team of 2</strong></div>
+            <div><small>Status</small><strong>Draft</strong></div>
+        </div>
+    </article>
+</section>
+
+<div class="modal-overlay" id="finalProjectModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card modal-card-lg">
+        <h3>Create Final Project</h3>
+        <form class="admin-form-grid" data-ui-only-form>
+            <label class="admin-form-field full"><span>Project Title</span><input type="text" placeholder="Enter final project title" /></label>
+            <label class="admin-form-field"><span>Major</span><select><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select></label>
+            <label class="admin-form-field"><span>Timeline</span><input type="text" value="2 Weeks" /></label>
+            <label class="admin-form-field full"><span>Project Brief</span><textarea rows="3" placeholder="Describe objectives, deliverables, and scoring..."></textarea></label>
+            <div class="modal-actions full"><button class="btn cyan" type="submit">Save Final Project</button><button class="btn ghost" type="button" data-close-modal>Cancel</button></div>
+        </form>
+    </div>
+</div>

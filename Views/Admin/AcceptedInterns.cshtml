@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Accepted Interns";
+}
+
+<section class="page-toolbar">
+    <h2>Accepted Interns <span class="pill green-soft">47</span></h2>
+    <div class="toolbar-actions">
+        <input type="search" placeholder="Search accepted interns..." />
+        <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
+        <button class="btn ghost" type="button">Export CSV</button>
+    </div>
+</section>
+
+<div class="table-wrap">
+    <table class="admin-table">
+        <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Major</th><th>Status</th><th>Progress</th><th>Joined</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>01</td><td><div class="name-cell"><span class="mini-avatar web">SA</span><strong>Sara Ahmed</strong></div></td><td>sara@internhub.io</td><td><span class="pill cyan-soft">Web Dev</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line web"><i style="--w:78%"></i></div>78%</td><td>2026-01-10</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 1 })">👁</a></td></tr>
+            <tr><td>02</td><td><div class="name-cell"><span class="mini-avatar ai">OB</span><strong>Omar Bakri</strong></div></td><td>omar@internhub.io</td><td><span class="pill purple-soft">AI</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line ai"><i style="--w:56%"></i></div>56%</td><td>2026-02-02</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 2 })">👁</a></td></tr>
+            <tr><td>03</td><td><div class="name-cell"><span class="mini-avatar sec">LN</span><strong>Lina Nasser</strong></div></td><td>lina@internhub.io</td><td><span class="pill amber-soft">Security</span></td><td><span class="pill green-soft">Active</span></td><td><div class="progress-line sec"><i style="--w:92%"></i></div>92%</td><td>2026-01-17</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 3 })">👁</a></td></tr>
+            <tr><td>04</td><td><div class="name-cell"><span class="mini-avatar data">RS</span><strong>Rania Saleh</strong></div></td><td>rania@internhub.io</td><td><span class="pill green-soft">Data</span></td><td><span class="pill purple-soft">Completed</span></td><td><div class="progress-line data"><i style="--w:100%"></i></div>100%</td><td>2025-12-08</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 5 })">👁</a></td></tr>
+        </tbody>
+    </table>
+</div>

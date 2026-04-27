@@ -14,7 +14,7 @@ namespace InternSystemProject.Controllers
         [HttpGet]
         public IActionResult Tasks()
         {
-            SetPage("Tasks");
+            SetPage("My Tasks");
             return View();
         }
 
@@ -33,9 +33,16 @@ namespace InternSystemProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Courses()
+        public IActionResult FinalProject()
         {
-            SetPage("Courses");
+            SetPage("Final Project");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            SetPage("Profile");
             return View();
         }
 

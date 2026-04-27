@@ -29,10 +29,11 @@
             </div>
             <nav class="student-nav">
                 <a class="student-link @(currentAction == "dashboard" ? "active" : string.Empty)" href="@Url.Action("Dashboard", "Student")">Dashboard</a>
-                <a class="student-link @(currentAction == "tasks" ? "active" : string.Empty)" href="@Url.Action("Tasks", "Student")">Tasks</a>
+                <a class="student-link @(currentAction == "tasks" ? "active" : string.Empty)" href="@Url.Action("Tasks", "Student")">My Tasks</a>
                 <a class="student-link @(currentAction == "projects" ? "active" : string.Empty)" href="@Url.Action("Projects", "Student")">Projects</a>
+                <a class="student-link @(currentAction == "finalproject" ? "active" : string.Empty)" href="@Url.Action("FinalProject", "Student")">Final Project</a>
                 <a class="student-link @(currentAction == "progress" ? "active" : string.Empty)" href="@Url.Action("Progress", "Student")">Progress</a>
-                <a class="student-link @(currentAction == "courses" ? "active" : string.Empty)" href="@Url.Action("Courses", "Student")">Courses</a>
+                <a class="student-link @(currentAction == "profile" ? "active" : string.Empty)" href="@Url.Action("Profile", "Student")">Profile</a>
                 <a class="student-link @(currentAction == "settings" ? "active" : string.Empty)" href="@Url.Action("Settings", "Student")">Settings</a>
             </nav>
             <div class="student-profile">

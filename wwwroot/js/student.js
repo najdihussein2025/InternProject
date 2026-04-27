@@ -44,4 +44,10 @@
     appForm.reset();
     requiredInputs.forEach((input) => input.classList.remove("invalid"));
   });
+
+  document.querySelectorAll("[data-task-submit]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      window.alert("Task submission recorded (UI only).");
+    });
+  });
 })();

@@ -32,8 +32,20 @@ a{text-decoration:none;color:inherit}
 .student-actions-row{display:flex;gap:.55rem;margin-top:.8rem;flex-wrap:wrap}
 .progress-main{text-align:center}.student-progress-lg{margin:1rem auto;width:min(520px,100%);height:18px;background:var(--bg2);border-radius:99px;position:relative}.student-progress-lg i{display:block;height:100%;width:var(--w);background:var(--cyan);border-radius:99px}.student-progress-lg span{position:absolute;inset:0;display:grid;place-items:center;font:600 .8rem "JetBrains Mono",monospace;color:var(--txt)}
 .student-bars{display:grid;gap:.7rem}.student-bars div{display:grid;grid-template-columns:110px 1fr;gap:.6rem;align-items:center}.student-bars i{display:block;height:10px;background:var(--cyan);width:var(--w);border-radius:99px}
+.student-timeline{list-style:none;padding:0;margin:0;display:grid;gap:.75rem}
+.student-timeline li{display:grid;grid-template-columns:130px 1fr;gap:.8rem;align-items:start;border-bottom:1px solid var(--border);padding-bottom:.6rem}
+.student-timeline li:last-child{border-bottom:0;padding-bottom:0}
+.student-timeline span{font:.74rem "JetBrains Mono",monospace;text-transform:uppercase;color:var(--muted);background:var(--bg2);padding:.2rem .45rem;border-radius:999px;display:inline-block}
+.student-timeline p{margin:0}
 .student-settings-wrap{display:flex;justify-content:center}.student-settings-card{width:min(520px,100%)}.student-settings-card p{margin-top:0}
 .student-pwd-wrap{position:relative;margin-bottom:.7rem}.student-pwd-wrap input{width:100%;padding:.66rem 2.6rem .66rem .75rem;border:1px solid var(--border);border-radius:9px;background:#fff}.student-pwd-wrap button{position:absolute;right:.55rem;top:50%;transform:translateY(-50%);border:0;background:transparent;cursor:pointer;color:var(--muted)}
+.student-profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin-top:.8rem}
+.student-profile-field{display:grid;gap:.35rem}
+.student-profile-field label{font-size:.84rem;font-weight:500}
+.student-profile-field input,.student-profile-field textarea{width:100%;padding:.66rem .75rem;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none}
+.student-profile-field input:focus,.student-profile-field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan15)}
+.student-profile-field textarea{resize:vertical}
+.student-profile-field.full{grid-column:1/-1}
 .student-app-header h2{margin:0;font:700 1.35rem "Syne",sans-serif}.student-app-header p{margin:.35rem 0 0;color:var(--muted)}
 .student-app-wrap{display:flex;justify-content:center;margin-top:1rem}
 .student-app-card{width:min(860px,100%);padding:1.35rem;box-shadow:0 14px 26px rgba(15,23,42,.08)}
@@ -51,4 +63,4 @@ a{text-decoration:none;color:inherit}
 .onboarding-steps span.active{background:var(--cyan15);color:var(--cyan)}
 .student-overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);opacity:0;visibility:hidden}
 @media (max-width: 1024px){.student-cards,.student-cards.compact,.student-grid-two,.student-project-grid,.student-course-grid{grid-template-columns:1fr 1fr}}
-@media (max-width: 767px){.student-sidebar{transform:translateX(-250px);transition:.2s;z-index:40}.student-main{margin-left:0}.student-search{display:none}.student-menu-btn{display:inline-grid;place-items:center;border:1px solid var(--border);background:var(--card);width:34px;height:34px;border-radius:8px}body.student-sidebar-open .student-sidebar{transform:translateX(0)}body.student-sidebar-open .student-overlay{opacity:1;visibility:visible;z-index:30}.student-cards,.student-cards.compact,.student-grid-two,.student-project-grid,.student-course-grid,.student-app-grid,.student-app-upload{grid-template-columns:1fr}}
+@media (max-width: 767px){.student-sidebar{transform:translateX(-250px);transition:.2s;z-index:40}.student-main{margin-left:0}.student-search{display:none}.student-menu-btn{display:inline-grid;place-items:center;border:1px solid var(--border);background:var(--card);width:34px;height:34px;border-radius:8px}body.student-sidebar-open .student-sidebar{transform:translateX(0)}body.student-sidebar-open .student-overlay{opacity:1;visibility:visible;z-index:30}.student-cards,.student-cards.compact,.student-grid-two,.student-project-grid,.student-course-grid,.student-app-grid,.student-app-upload,.student-profile-grid,.student-timeline li{grid-template-columns:1fr}}

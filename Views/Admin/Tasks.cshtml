@@ -1,0 +1,40 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Tasks";
+}
+
+<section class="page-toolbar">
+    <h2>Program Tasks</h2>
+    <div class="toolbar-actions">
+        <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
+        <select><option>All Months</option><option>Month 1</option><option>Month 2</option><option>Month 3</option></select>
+        <button class="btn primary-add" type="button" data-open-modal="globalTaskModal"><span class="plus-icon">+</span> Add Task</button>
+    </div>
+</section>
+
+<div class="table-wrap">
+    <table class="admin-table">
+        <thead>
+            <tr><th>#</th><th>Task</th><th>Major</th><th>Phase</th><th>Due Week</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>01</td><td>Responsive Layout Build</td><td>Web Dev</td><td>Month 1</td><td>Week 2</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+            <tr><td>02</td><td>Classification Model Evaluation</td><td>AI</td><td>Month 2</td><td>Week 7</td><td><span class="pill amber-soft">Draft</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+            <tr><td>03</td><td>Threat Modeling Exercise</td><td>Security</td><td>Month 1</td><td>Week 3</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-overlay" id="globalTaskModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card modal-card-lg">
+        <h3>Add Program Task</h3>
+        <form class="admin-form-grid" data-ui-only-form>
+            <label class="admin-form-field full"><span>Task Title</span><input type="text" placeholder="Enter task title" /></label>
+            <label class="admin-form-field"><span>Major</span><select><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select></label>
+            <label class="admin-form-field"><span>Phase</span><select><option>Month 1</option><option>Month 2</option><option>Month 3</option></select></label>
+            <label class="admin-form-field"><span>Due Week</span><input type="text" placeholder="Week 2" /></label>
+            <label class="admin-form-field full"><span>Description</span><textarea rows="3" placeholder="Task details and expected output..."></textarea></label>
+            <div class="modal-actions full"><button class="btn cyan" type="submit">Save Task</button><button class="btn ghost" type="button" data-close-modal>Cancel</button></div>
+        </form>
+    </div>
+</div>

@@ -164,4 +164,19 @@
       btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
     });
   });
+
+  document.querySelectorAll("[data-ui-only-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => event.preventDefault());
+  });
+
+  document.querySelectorAll("[data-file-preview-input]").forEach((input) => {
+    input.addEventListener("change", () => {
+      const targetId = input.dataset.previewTarget;
+      const preview = targetId ? document.getElementById(targetId) : null;
+      if (!preview) return;
+      const selected = input.files && input.files.length ? input.files[0].name : "";
+      preview.textContent = selected ? `Selected file: ${selected}` : "";
+      preview.classList.toggle("visible", Boolean(selected));
+    });
+  });
 })();

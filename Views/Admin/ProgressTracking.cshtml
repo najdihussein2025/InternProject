@@ -1,0 +1,33 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Progress Tracking";
+}
+
+<section class="page-toolbar">
+    <h2>Progress Tracking</h2>
+    <div class="toolbar-actions">
+        <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
+        <select><option>All Statuses</option><option>On Track</option><option>At Risk</option><option>Completed</option></select>
+    </div>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card"><div class="stat-head"><span>On Track</span><i class="icon-box green"></i></div><h3>31</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>At Risk</span><i class="icon-box amber"></i></div><h3>9</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>Completed</span><i class="icon-box cyan"></i></div><h3>7</h3></article>
+    <article class="stat-card"><div class="stat-head"><span>Average Score</span><i class="icon-box purple"></i></div><h3>82%</h3></article>
+</section>
+
+<section class="card">
+    <h3>Intern Progress Matrix</h3>
+    <div class="table-wrap">
+        <table class="admin-table">
+            <thead><tr><th>Name</th><th>Major</th><th>Month 1</th><th>Month 2</th><th>Month 3</th><th>Final Project</th><th>Overall</th></tr></thead>
+            <tbody>
+                <tr><td>Sara Ahmed</td><td>Web</td><td><span class="pill green-soft">88%</span></td><td><span class="pill green-soft">84%</span></td><td><span class="pill green-soft">79%</span></td><td><span class="pill cyan-soft">In Progress</span></td><td><div class="progress-line web"><i style="--w:84%"></i></div></td></tr>
+                <tr><td>Omar Bakri</td><td>AI</td><td><span class="pill amber-soft">62%</span></td><td><span class="pill amber-soft">58%</span></td><td><span class="pill">Not Started</span></td><td><span class="pill">Pending</span></td><td><div class="progress-line ai"><i style="--w:60%"></i></div></td></tr>
+                <tr><td>Lina Nasser</td><td>Security</td><td><span class="pill green-soft">93%</span></td><td><span class="pill green-soft">90%</span></td><td><span class="pill green-soft">88%</span></td><td><span class="pill green-soft">Submitted</span></td><td><div class="progress-line sec"><i style="--w:90%"></i></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

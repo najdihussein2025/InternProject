@@ -1,0 +1,20 @@
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.PageTitle = "Profile";
+}
+
+<section class="student-panel">
+    <h3>My Profile</h3>
+    <p>Manage your personal details and internship profile information.</p>
+    <div class="student-profile-grid">
+        <div class="student-profile-field"><label>Full Name</label><input type="text" value="Sara Ahmed" /></div>
+        <div class="student-profile-field"><label>Email</label><input type="email" value="sara@internhub.io" /></div>
+        <div class="student-profile-field"><label>University</label><input type="text" value="Cairo University" /></div>
+        <div class="student-profile-field"><label>Current Major</label><input type="text" value="Web Development" /></div>
+        <div class="student-profile-field full"><label>Bio</label><textarea rows="4">Frontend-focused intern building modern, responsive dashboards and web apps.</textarea></div>
+    </div>
+    <div class="student-actions-row">
+        <button class="student-btn primary" type="button">Save Profile</button>
+        <button class="student-btn" type="button">Cancel</button>
+    </div>
+</section>

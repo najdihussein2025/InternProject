@@ -1,0 +1,188 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Major Details";
+}
+
+<section class="page-toolbar major-details-header">
+    <div>
+        <a class="back-link" href="@Url.Action("Majors","Admin")">← Back to Majors</a>
+        <h2>Web Development Program</h2>
+        <p class="muted-text">Fixed Duration: 3 Months</p>
+    </div>
+</section>
+
+<section class="card major-details-wrap" data-settings-tabs>
+    <div class="major-phase-tabs">
+        <button class="active" type="button" data-tab-target="month1">Month 1</button>
+        <button type="button" data-tab-target="month2">Month 2</button>
+        <button type="button" data-tab-target="month3">Month 3</button>
+        <button type="button" data-tab-target="finalProject">Final Project</button>
+    </div>
+
+    <div class="tab-panel active" data-tab-panel="month1">
+        <div class="major-section-head">
+            <h3>Tasks</h3>
+            <button class="btn primary-add" type="button" data-open-modal="taskModal"><span class="plus-icon">+</span> Add Task</button>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>#</th><th>Task Name</th><th>Type</th><th>Due Week</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td>HTML & CSS Fundamentals</td><td>Assignment</td><td>Week 1</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                    <tr><td>02</td><td>Responsive Landing Page</td><td>Project Task</td><td>Week 2</td><td><span class="pill amber-soft">Draft</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                    <tr><td>03</td><td>JavaScript Basics Quiz</td><td>Quiz</td><td>Week 4</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="major-section-head section-gap">
+            <h3>Projects</h3>
+            <button class="btn primary-add" type="button" data-open-modal="projectModal"><span class="plus-icon">+</span> Add Project</button>
+        </div>
+        <section class="cards-grid">
+            <article class="card major-project-card">
+                <h4>Portfolio Website</h4>
+                <p>Build a personal portfolio using semantic HTML, CSS animations, and responsive layouts.</p>
+                <div class="major-project-meta">
+                    <span class="pill cyan-soft">Week 3</span>
+                    <span class="pill purple-soft">Team of 2</span>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <div class="tab-panel" data-tab-panel="month2">
+        <div class="major-section-head">
+            <h3>Tasks</h3>
+            <button class="btn primary-add" type="button" data-open-modal="taskModal"><span class="plus-icon">+</span> Add Task</button>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>#</th><th>Task Name</th><th>Type</th><th>Due Week</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td>ASP.NET Core MVC Basics</td><td>Assignment</td><td>Week 5</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                    <tr><td>02</td><td>Entity Framework Intro</td><td>Practice Lab</td><td>Week 6</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="major-section-head section-gap">
+            <h3>Projects</h3>
+            <button class="btn primary-add" type="button" data-open-modal="projectModal"><span class="plus-icon">+</span> Add Project</button>
+        </div>
+        <section class="cards-grid">
+            <article class="card major-project-card">
+                <h4>Intern Management API</h4>
+                <p>Create CRUD endpoints and integrate them into an admin interface.</p>
+                <div class="major-project-meta">
+                    <span class="pill cyan-soft">Week 7</span>
+                    <span class="pill amber-soft">Individual</span>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <div class="tab-panel" data-tab-panel="month3">
+        <div class="major-section-head">
+            <h3>Tasks</h3>
+            <button class="btn primary-add" type="button" data-open-modal="taskModal"><span class="plus-icon">+</span> Add Task</button>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>#</th><th>Task Name</th><th>Type</th><th>Due Week</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td>Cloud Deployment Basics</td><td>Assignment</td><td>Week 9</td><td><span class="pill green-soft">Published</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                    <tr><td>02</td><td>Performance Optimization</td><td>Case Study</td><td>Week 11</td><td><span class="pill amber-soft">Draft</span></td><td class="actions"><button class="icon-btn-inline" type="button">✏️</button><button class="icon-btn-inline" type="button">🗑</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="major-section-head section-gap">
+            <h3>Projects</h3>
+            <button class="btn primary-add" type="button" data-open-modal="projectModal"><span class="plus-icon">+</span> Add Project</button>
+        </div>
+        <section class="cards-grid">
+            <article class="card major-project-card">
+                <h4>Scalable Dashboard Build</h4>
+                <p>Build a complete dashboard module with analytics and role-based views.</p>
+                <div class="major-project-meta">
+                    <span class="pill cyan-soft">Week 10</span>
+                    <span class="pill purple-soft">Team of 3</span>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <div class="tab-panel" data-tab-panel="finalProject">
+        <article class="card final-project-card">
+            <h3>Final Project: Internship Portal Platform</h3>
+            <p>Students build and present a complete internship management platform covering admin workflows, student dashboards, reporting, and secure authentication.</p>
+            <div class="final-project-grid">
+                <div><small>Timeline</small><strong>2 Weeks</strong></div>
+                <div><small>Submission Type</small><strong>Team Delivery</strong></div>
+                <div><small>Evaluation</small><strong>Demo + Code Review</strong></div>
+                <div><small>Weight</small><strong>40% of Program</strong></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<div class="modal-overlay" id="taskModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card modal-card-lg">
+        <h3>Add Task</h3>
+        <form class="admin-form-grid" data-ui-only-form>
+            <label class="admin-form-field full">
+                <span>Task Name</span>
+                <input type="text" placeholder="Enter task name" />
+            </label>
+            <label class="admin-form-field">
+                <span>Month</span>
+                <select><option>Month 1</option><option>Month 2</option><option>Month 3</option></select>
+            </label>
+            <label class="admin-form-field">
+                <span>Due Week</span>
+                <input type="text" placeholder="Week 1" />
+            </label>
+            <label class="admin-form-field full">
+                <span>Description</span>
+                <textarea rows="3" placeholder="Add task instructions..."></textarea>
+            </label>
+            <div class="modal-actions full">
+                <button class="btn cyan" type="submit">Save Task</button>
+                <button class="btn ghost" type="button" data-close-modal>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="projectModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card modal-card-lg">
+        <h3>Add Project</h3>
+        <form class="admin-form-grid" data-ui-only-form>
+            <label class="admin-form-field full">
+                <span>Project Title</span>
+                <input type="text" placeholder="Enter project title" />
+            </label>
+            <label class="admin-form-field">
+                <span>Month</span>
+                <select><option>Month 1</option><option>Month 2</option><option>Month 3</option></select>
+            </label>
+            <label class="admin-form-field">
+                <span>Team Size</span>
+                <select><option>Individual</option><option>Team of 2</option><option>Team of 3</option></select>
+            </label>
+            <label class="admin-form-field full">
+                <span>Project Brief</span>
+                <textarea rows="3" placeholder="Describe project objectives and expected output..."></textarea>
+            </label>
+            <div class="modal-actions full">
+                <button class="btn cyan" type="submit">Save Project</button>
+                <button class="btn ghost" type="button" data-close-modal>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

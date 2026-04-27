@@ -11,6 +11,7 @@
         <input type="search" placeholder="Search interns..." />
         <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
         <button class="btn ghost" type="button">Export CSV</button>
+        <button class="btn primary-add" type="button" data-open-modal="addUserModal"><span class="plus-icon">+</span> Add User</button>
     </div>
 </section>
 
@@ -72,6 +73,56 @@
             <label>Skills <input type="text" data-edit-field="skills" placeholder=".NET, API, Docker, SQL" /></label>
             <div class="modal-actions">
                 <button class="btn cyan" type="submit">Save Changes</button>
+                <button class="btn ghost" type="button" data-close-modal>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="addUserModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card modal-card-lg">
+        <h3>Add New User</h3>
+        <form class="admin-form-grid" data-ui-only-form>
+            <label class="admin-form-field">
+                <span>Full Name</span>
+                <input type="text" placeholder="Enter full name" />
+            </label>
+            <label class="admin-form-field">
+                <span>Email</span>
+                <input type="email" placeholder="name@university.edu" />
+            </label>
+            <label class="admin-form-field">
+                <span>Password</span>
+                <input type="password" placeholder="Create password" />
+            </label>
+            <label class="admin-form-field">
+                <span>Major</span>
+                <select>
+                    <option value="">Select major</option>
+                    <option>Web Dev</option>
+                    <option>AI</option>
+                    <option>Security</option>
+                    <option>Data</option>
+                </select>
+            </label>
+            <label class="admin-form-field">
+                <span>Role</span>
+                <select>
+                    <option value="">Select role</option>
+                    <option>Admin</option>
+                    <option>Student</option>
+                </select>
+            </label>
+            <label class="admin-form-field">
+                <span>Status</span>
+                <select>
+                    <option value="">Select status</option>
+                    <option>Active</option>
+                    <option>Pending</option>
+                </select>
+            </label>
+            <div class="modal-actions full">
+                <button class="btn cyan" type="submit">Create User</button>
                 <button class="btn ghost" type="button" data-close-modal>Cancel</button>
             </div>
         </form>

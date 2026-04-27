@@ -1,0 +1,37 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.PageTitle = "Major Interns";
+}
+
+<section class="page-toolbar">
+    <div>
+        <a class="back-link" href="@Url.Action("Majors","Admin")">← Back to Majors</a>
+        <h2>Web Development Interns</h2>
+        <p class="muted-text">Accepted interns assigned to this major program.</p>
+    </div>
+    <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = ViewBag.MajorId })">Manage Program</a>
+</section>
+
+<section class="toolbar-actions">
+    <input type="search" placeholder="Search interns..." />
+    <select>
+        <option>Accepted Only</option>
+        <option>Active</option>
+        <option>Completed</option>
+    </select>
+</section>
+
+<div class="table-wrap">
+    <table class="admin-table">
+        <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Major</th><th>Joined</th><th>Status</th><th>Progress</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>01</td><td><div class="name-cell"><span class="mini-avatar web">SA</span><strong>Sara Ahmed</strong></div></td><td>sara@internhub.io</td><td><span class="pill cyan-soft">Web Development</span></td><td>2026-01-10</td><td><span class="pill green-soft">Accepted</span></td><td>78%</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 1 })">👁</a></td></tr>
+            <tr><td>02</td><td><div class="name-cell"><span class="mini-avatar web">KM</span><strong>Karim Mansour</strong></div></td><td>karim@internhub.io</td><td><span class="pill cyan-soft">Web Development</span></td><td>2026-03-01</td><td><span class="pill green-soft">Accepted</span></td><td>55%</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 4 })">👁</a></td></tr>
+            <tr><td>03</td><td><div class="name-cell"><span class="mini-avatar web">FH</span><strong>Faris Hassan</strong></div></td><td>faris@internhub.io</td><td><span class="pill cyan-soft">Web Development</span></td><td>2026-04-01</td><td><span class="pill green-soft">Accepted</span></td><td>15%</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 8 })">👁</a></td></tr>
+            <tr><td>04</td><td><div class="name-cell"><span class="mini-avatar web">NM</span><strong>Noor Maher</strong></div></td><td>noor@internhub.io</td><td><span class="pill cyan-soft">Web Development</span></td><td>2026-02-14</td><td><span class="pill green-soft">Accepted</span></td><td>82%</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 11 })">👁</a></td></tr>
+            <tr><td>05</td><td><div class="name-cell"><span class="mini-avatar web">YA</span><strong>Youssef Adel</strong></div></td><td>youssef@internhub.io</td><td><span class="pill cyan-soft">Web Development</span></td><td>2026-02-28</td><td><span class="pill green-soft">Accepted</span></td><td>64%</td><td class="actions"><a href="@Url.Action("UserDetails","Admin", new { id = 12 })">👁</a></td></tr>
+        </tbody>
+    </table>
+</div>

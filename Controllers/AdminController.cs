@@ -25,6 +25,20 @@ namespace InternSystemProject.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AcceptedInterns()
+        {
+            SetSharedViewBags("Accepted Interns");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Archived()
+        {
+            SetSharedViewBags("Archived");
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AcceptApplication(int id, string major)
@@ -60,6 +74,36 @@ namespace InternSystemProject.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult MajorDetails(int id = 1)
+        {
+            SetSharedViewBags("Major Details");
+            ViewBag.MajorId = id;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult MajorInterns(int id = 1)
+        {
+            SetSharedViewBags("Major Interns");
+            ViewBag.MajorId = id;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Tasks()
+        {
+            SetSharedViewBags("Tasks");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult FinalProjects()
+        {
+            SetSharedViewBags("Final Projects");
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddMajor()
@@ -83,32 +127,10 @@ namespace InternSystemProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Courses()
+        public IActionResult ProgressTracking()
         {
-            SetSharedViewBags("Courses");
+            SetSharedViewBags("Progress Tracking");
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddCourse()
-        {
-            TempData["Success"] = "Course created successfully.";
-            return RedirectToAction(nameof(Courses));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteCourse(int id)
-        {
-            if (id <= 0)
-            {
-                TempData["Error"] = "Invalid course selection.";
-                return RedirectToAction(nameof(Courses));
-            }
-
-            TempData["Success"] = "Course deleted successfully.";
-            return RedirectToAction(nameof(Courses));
         }
 
         [HttpGet]
