@@ -25,11 +25,13 @@ builder.Services.AddHttpContextAccessor();
 // REPOSITORIES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMajorRepository, MajorRepository>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // SERVICES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMajorService, MajorService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

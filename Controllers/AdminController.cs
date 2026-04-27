@@ -10,10 +10,12 @@ using InternSystemProject.Interfaces.Services;
 public class AdminController : BaseController
 {
     private readonly IUserService _userService;
+    private readonly IMajorService _majorService;
 
-    public AdminController(IUserService userService)
+    public AdminController(IUserService userService, IMajorService majorService)
     {
         _userService = userService;
+        _majorService = majorService;
     }
 
     // ── DASHBOARD ────────────────────────────────
@@ -71,11 +73,33 @@ public class AdminController : BaseController
     }
 
     [HttpGet]
-    public IActionResult Majors()
+    public async Task<IActionResult> Majors()
     {
         ViewBag.PageTitle = "Majors";
         ViewBag.AdminName = GetCurrentUserName();
-        return View();
+        var majors = await _majorService.GetAllMajorsAsync();
+        return View(majors);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateMajor(InternSystemProject.DTOs.Major.CreateMajorDto dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            TempData["Error"] = "Please provide valid major information.";
+            return RedirectToAction("Majors");
+        }
+
+        var (success, error) = await _majorService.CreateMajorAsync(dto);
+        if (!success)
+        {
+            TempData["Error"] = error;
+            return RedirectToAction("Majors");
+        }
+
+        TempData["Success"] = "Major created successfully.";
+        return RedirectToAction("Majors");
     }
 
     [HttpGet]

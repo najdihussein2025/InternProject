@@ -5,6 +5,7 @@ public class Major
     public string Duration { get; set; } = "3 Months";
     public string? Description { get; set; }
     public string ThemeColor { get; set; } = "Cyan";       
+    public int MaxInterns { get; set; } = 30;
 
     // Navigation
     public ICollection<User> Users { get; set; } = new List<User>();

@@ -1,8 +1,11 @@
+@model IEnumerable<InternSystemProject.DTOs.Major.MajorDto>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.PageTitle = "Majors";
 }
-@* TODO: replace with Model data *@
+@{
+    var majors = Model ?? Enumerable.Empty<InternSystemProject.DTOs.Major.MajorDto>();
+}
 <section class="page-toolbar">
     <div>
         <h2>Majors</h2>
@@ -12,84 +15,84 @@
 </section>
 
 <section class="cards-grid major-program-grid">
-    <article class="major-program-card">
-        <i class="major-top cyan"></i>
-        <h3>Web Development</h3>
-        <p class="major-duration">Duration: 3 Months</p>
-        <div class="major-metrics">
-            <div><small>Interns</small><strong>22</strong></div>
-            <div><small>Tasks</small><strong>18</strong></div>
-        </div>
-        <div class="major-card-actions">
-            <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = 1 })">Manage Program</a>
-            <a class="btn ghost" href="@Url.Action("MajorInterns","Admin", new { id = 1 })">View Interns</a>
-        </div>
-    </article>
-    <article class="major-program-card">
-        <i class="major-top purple"></i>
-        <h3>Artificial Intelligence</h3>
-        <p class="major-duration">Duration: 3 Months</p>
-        <div class="major-metrics">
-            <div><small>Interns</small><strong>17</strong></div>
-            <div><small>Tasks</small><strong>21</strong></div>
-        </div>
-        <div class="major-card-actions">
-            <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = 2 })">Manage Program</a>
-            <a class="btn ghost" href="@Url.Action("MajorInterns","Admin", new { id = 2 })">View Interns</a>
-        </div>
-    </article>
-    <article class="major-program-card">
-        <i class="major-top amber"></i>
-        <h3>Cybersecurity</h3>
-        <p class="major-duration">Duration: 3 Months</p>
-        <div class="major-metrics">
-            <div><small>Interns</small><strong>14</strong></div>
-            <div><small>Tasks</small><strong>16</strong></div>
-        </div>
-        <div class="major-card-actions">
-            <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = 3 })">Manage Program</a>
-            <a class="btn ghost" href="@Url.Action("MajorInterns","Admin", new { id = 3 })">View Interns</a>
-        </div>
-    </article>
-    <article class="major-program-card">
-        <i class="major-top green"></i>
-        <h3>Data Engineering</h3>
-        <p class="major-duration">Duration: 3 Months</p>
-        <div class="major-metrics">
-            <div><small>Interns</small><strong>12</strong></div>
-            <div><small>Tasks</small><strong>19</strong></div>
-        </div>
-        <div class="major-card-actions">
-            <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = 4 })">Manage Program</a>
-            <a class="btn ghost" href="@Url.Action("MajorInterns","Admin", new { id = 4 })">View Interns</a>
-        </div>
-    </article>
+    @foreach (var major in majors)
+    {
+        var theme = string.IsNullOrWhiteSpace(major.ThemeColor) ? "cyan" : major.ThemeColor.ToLowerInvariant();
+        <article class="major-program-card">
+            <i class="major-top @theme"></i>
+            <h3>@major.Name</h3>
+            <p class="major-duration">Duration: @major.Duration</p>
+            <div class="major-metrics">
+                <div><small>Interns</small><strong>@major.InternsCount / @major.MaxInterns</strong></div>
+            </div>
+            <div class="major-card-actions">
+                <a class="btn cyan" href="@Url.Action("MajorDetails","Admin", new { id = major.Id })">Manage Program</a>
+                <a class="btn ghost" href="@Url.Action("MajorInterns","Admin", new { id = major.Id })">View Interns</a>
+            </div>
+        </article>
+    }
+    @if (!majors.Any())
+    {
+        <article class="major-program-card">
+            <h3>No majors yet</h3>
+            <p class="major-duration">Create your first major using the Add Major button.</p>
+        </article>
+    }
 </section>
 
 <div class="modal-overlay" id="majorModal" data-modal role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-card modal-card-lg">
         <h3>Add Major</h3>
-        <form class="admin-form-grid" data-ui-only-form>
+        <form class="admin-form-grid" action="@Url.Action("CreateMajor","Admin")" method="post">
+            @Html.AntiForgeryToken()
             <label class="admin-form-field full">
                 <span>Major Name</span>
-                <input type="text" placeholder="Enter major name" />
+                <input
+                    id="majorName"
+                    type="text"
+                    name="Name"
+                    placeholder="Enter major name"
+                    minlength="2"
+                    maxlength="80"
+                    autocomplete="off"
+                    required />
             </label>
             <label class="admin-form-field">
                 <span>Duration</span>
-                <input type="text" value="3 Months" readonly />
+                <select id="majorDuration" name="Duration" required>
+                    <option value="3 Months" selected>3 Months</option>
+                    <option value="4 Months">4 Months</option>
+                    <option value="6 Months">6 Months</option>
+                </select>
             </label>
             <label class="admin-form-field">
                 <span>Theme Color</span>
-                <select>
-                    <option>Cyan</option>
-                    <option>Purple</option>
-                    <option>Amber</option>
-                    <option>Green</option>
+                <select id="majorThemeColor" name="ThemeColor" required>
+                    <option value="Cyan">Cyan</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Amber">Amber</option>
+                    <option value="Green">Green</option>
                 </select>
+            </label>
+            <label class="admin-form-field">
+                <span>Max Interns</span>
+                <input
+                    id="majorMaxInterns"
+                    type="number"
+                    name="MaxInterns"
+                    value="30"
+                    min="1"
+                    max="1000"
+                    required />
             </label>
             <label class="admin-form-field full">
                 <span>Description</span>
-                <textarea rows="3" placeholder="Describe this major program..."></textarea>
+                <textarea
+                    id="majorDescription"
+                    rows="3"
+                    name="Description"
+                    maxlength="600"
+                    placeholder="Describe this major program..."></textarea>
             </label>
             <div class="modal-actions full">
                 <button class="btn cyan" type="submit">Create Major</button>
