@@ -1,32 +1,37 @@
 namespace InternSystemProject.Controllers;
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using InternSystemProject.DTOs.User;
-using InternSystemProject.Helpers;
 using InternSystemProject.Interfaces.Services;
 
 public class AuthController : BaseController
 {
     private readonly IUserService _userService;
+    private readonly IJwtService _jwtService;
+    private readonly IConfiguration _configuration;
 
-    public AuthController(IUserService userService, SessionHelper session)
-        : base(session)
+    public AuthController(IUserService userService, IJwtService jwtService, IConfiguration configuration)
     {
         _userService = userService;
+        _jwtService = jwtService;
+        _configuration = configuration;
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Register()
     {
-        if (_session.IsLoggedIn())
-            return RedirectToDashboard(_session.GetCurrentUserRole());
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToDashboard(GetCurrentUserRole(), "Active");
 
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AllowAnonymous]
     public async Task<IActionResult> Register(CreateUserDto dto)
     {
         if (!ModelState.IsValid)
@@ -45,22 +50,24 @@ public class AuthController : BaseController
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Login()
     {
-        if (_session.IsLoggedIn())
-            return RedirectToDashboard(_session.GetCurrentUserRole());
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToDashboard(GetCurrentUserRole(), "Active");
 
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(LoginDto dto)
     {
         if (!ModelState.IsValid)
             return View(dto);
 
-        var (success, error, role) = await _userService.LoginAsync(dto);
+        var (success, error, user) = await _userService.LoginAsync(dto);
 
         if (!success)
         {
@@ -68,26 +75,58 @@ public class AuthController : BaseController
             return View(dto);
         }
 
-        return RedirectToDashboard(role);
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "Unable to complete login.");
+            return View(dto);
+        }
+
+        if (user.Status == "Rejected")
+        {
+            ModelState.AddModelError(string.Empty, "Your application was rejected.");
+            return View(dto);
+        }
+
+        var token = _jwtService.GenerateToken(user);
+        var expireMinutes = int.TryParse(_configuration.GetSection("Jwt")["ExpireMinutes"], out var minutes) ? minutes : 120;
+
+        Response.Cookies.Append("jwt", token, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Lax,
+            Expires = DateTimeOffset.UtcNow.AddMinutes(expireMinutes),
+            IsEssential = true
+        });
+
+        return RedirectToDashboard(user.Role, user.Status);
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Logout()
     {
-        _session.Clear();
+        Response.Cookies.Delete("jwt");
         return RedirectToAction("Index", "Home");
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize]
     public IActionResult LogoutPost()
     {
-        _session.Clear();
+        Response.Cookies.Delete("jwt");
         return RedirectToAction("Index", "Home");
     }
 
-    private IActionResult RedirectToDashboard(string? role)
+    private IActionResult RedirectToDashboard(string? role, string? status)
     {
+        if (status == "Pending")
+            return RedirectToAction("Status", "Application");
+
+        if (status == "Rejected")
+            return RedirectToAction("Status", "Application");
+
         return role switch
         {
             "Admin" => RedirectToAction("Dashboard", "Admin"),

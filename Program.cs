@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using InternSystemProject.Data;
 using InternSystemProject.Interfaces.Repositories;
 using InternSystemProject.Interfaces.Services;
 using InternSystemProject.Repositories;
 using InternSystemProject.Services;
-using InternSystemProject.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +19,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         sqlOptions => sqlOptions.EnableRetryOnFailure()
     ));
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// SESSION (for login/auth)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(60);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
 builder.Services.AddHttpContextAccessor();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -37,11 +30,51 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 // SERVICES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// HELPERS
+// AUTHENTICATION / AUTHORIZATION
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-builder.Services.AddScoped<SessionHelper>();
+var jwtSection = builder.Configuration.GetSection("Jwt");
+var key = jwtSection["Key"] ?? throw new InvalidOperationException("JWT Key is missing.");
+var issuer = jwtSection["Issuer"] ?? throw new InvalidOperationException("JWT Issuer is missing.");
+var audience = jwtSection["Audience"] ?? throw new InvalidOperationException("JWT Audience is missing.");
+
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+            ClockSkew = TimeSpan.Zero
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                if (context.Request.Cookies.TryGetValue("jwt", out var token))
+                {
+                    context.Token = token;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // MVC
@@ -62,10 +95,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
-// session must be BEFORE MapControllerRoute
-app.UseSession();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

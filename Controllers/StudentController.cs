@@ -1,17 +1,14 @@
 namespace InternSystemProject.Controllers;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using InternSystemProject.Helpers;
 
+[Authorize(Roles = "Intern")]
 public class StudentController : BaseController
 {
-    public StudentController(SessionHelper session) : base(session) { }
-
     [HttpGet]
     public IActionResult Dashboard()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Dashboard");
         return View();
     }
@@ -19,8 +16,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult Tasks()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("My Tasks");
         return View();
     }
@@ -28,8 +23,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult Projects()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Projects");
         return View();
     }
@@ -37,8 +30,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult Progress()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Progress");
         return View();
     }
@@ -46,8 +37,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult FinalProject()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Final Project");
         return View();
     }
@@ -55,8 +44,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult Profile()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Profile");
         return View();
     }
@@ -64,8 +51,6 @@ public class StudentController : BaseController
     [HttpGet]
     public IActionResult Settings()
     {
-        var auth = RequireIntern();
-        if (auth != null) return auth;
         SetPage("Settings");
         return View();
     }
@@ -73,7 +58,7 @@ public class StudentController : BaseController
     private void SetPage(string title)
     {
         ViewBag.PageTitle = title;
-        ViewBag.StudentName = _session.GetCurrentUserName();
+        ViewBag.StudentName = GetCurrentUserName();
         ViewBag.UnreadCount = 2;
     }
 }

@@ -10,12 +10,10 @@ using InternSystemProject.Models;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepo;
-    private readonly SessionHelper _session;
 
-    public UserService(IUserRepository userRepo, SessionHelper session)
+    public UserService(IUserRepository userRepo)
     {
         _userRepo = userRepo;
-        _session = session;
     }
 
     public async Task<(bool Success, string Error)> RegisterAsync(CreateUserDto dto)
@@ -41,7 +39,7 @@ public class UserService : IUserService
         return (true, string.Empty);
     }
 
-    public async Task<(bool Success, string Error, string? Role)> LoginAsync(LoginDto dto)
+    public async Task<(bool Success, string Error, User? User)> LoginAsync(LoginDto dto)
     {
 
         var user = await _userRepo.GetByEmailAsync(dto.Email);
@@ -52,15 +50,7 @@ public class UserService : IUserService
         if (!PasswordHasher.Verify(dto.Password, user.PasswordHash))
             return (false, "Invalid credentials.", null);
 
-        if (user.Status == "Pending")
-            return (false, "Your account is pending admin approval.", null);
-
-        if (user.Status == "Rejected")
-            return (false, "Your application was rejected.", null);
-
-        _session.SetCurrentUser(user);
-
-        return (true, string.Empty, user.Role);
+        return (true, string.Empty, user);
     }
 
     // Return all pending users as DTOs

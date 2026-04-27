@@ -1,0 +1,13 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Application Status";
+}
+
+<section class="public-main">
+    <div class="card">
+        <h1>Your application is under review</h1>
+        <p>Your account is created successfully, but admin approval is still pending.</p>
+        <p>You will be able to access the student dashboard after your status becomes active.</p>
+        <a class="public-btn public-btn-ghost" asp-controller="Home" asp-action="Index">Back to Home</a>
+    </div>
+</section>

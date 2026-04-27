@@ -1,101 +1,28 @@
 namespace InternSystemProject.Controllers;
 
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using InternSystemProject.DTOs.User;
-using InternSystemProject.Helpers;
-using InternSystemProject.Interfaces.Services;
 
 public class AccountController : BaseController
 {
-    private readonly IUserService _userService;
-
-    public AccountController(IUserService userService, SessionHelper session)
-        : base(session)
-    {
-        _userService = userService;
-    }
-
-    // ── REGISTER 
-
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Register()
     {
- 
-        if (_session.IsLoggedIn())
-            return RedirectToDashboard(_session.GetCurrentUserRole());
-
-        return View();
+        return RedirectToAction("Register", "Auth");
     }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(CreateUserDto dto)
-    {
-        if (!ModelState.IsValid)
-            return View(dto);
-
-        var (success, error) = await _userService.RegisterAsync(dto);
-
-        if (!success)
-        {
-            ModelState.AddModelError(string.Empty, error);
-            return View(dto);
-        }
-
-        TempData["Success"] = "Account created! Please wait for admin approval.";
-        return RedirectToAction("Login");
-    }
-
-    // ── LOGIN 
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Login()
     {
-
-        if (_session.IsLoggedIn())
-            return RedirectToDashboard(_session.GetCurrentUserRole());
-
-        return View();
+        return RedirectToAction("Login", "Auth");
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(LoginDto dto)
-    {
-        if (!ModelState.IsValid)
-            return View(dto);
-
-        var (success, error, role) = await _userService.LoginAsync(dto);
-
-        if (!success)
-        {
-            ModelState.AddModelError(string.Empty, error);
-            return View(dto);
-        }
-
-        return RedirectToDashboard(role);
-    }
-
-    // ── LOGOUT 
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
+    [HttpGet]
+    [Authorize]
     public IActionResult Logout()
     {
-        _session.Clear();
-        return RedirectToAction("Index", "Home");
-    }
-
-    // ── PRIVATE HELPER ───────────────────────────
-
-    private IActionResult RedirectToDashboard(string? role)
-    {
-        return role switch
-        {
-            "Admin" => RedirectToAction("Dashboard", "Admin"),
-            "Intern" => RedirectToAction("Dashboard", "Student"),
-            _ => RedirectToAction("Index", "Home")
-        };
+        return RedirectToAction("Logout", "Auth");
     }
 }

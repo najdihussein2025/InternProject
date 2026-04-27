@@ -1,40 +1,27 @@
 namespace InternSystemProject.Controllers;
 
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using InternSystemProject.Helpers;
 
 public class BaseController : Controller
 {
-    protected readonly SessionHelper _session;
-
-    public BaseController(SessionHelper session)
+    protected int? GetCurrentUserId()
     {
-        _session = session;
+        var id = User.FindFirst("UserId")?.Value
+            ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        return int.TryParse(id, out var parsed) ? parsed : null;
     }
 
-    protected IActionResult? RequireAdmin()
+    protected string? GetCurrentUserRole()
     {
-        var role = _session.GetCurrentUserRole();
-
-        if (role == null)
-            return RedirectToAction("Login", "Auth");
-
-        if (role != "Admin")
-            return RedirectToAction("Index", "Home");
-
-        return null; 
+        return User.FindFirst("Role")?.Value
+            ?? User.FindFirst(ClaimTypes.Role)?.Value;
     }
 
-    protected IActionResult? RequireIntern()
+    protected string? GetCurrentUserName()
     {
-        var role = _session.GetCurrentUserRole();
-
-        if (role == null)
-            return RedirectToAction("Login", "Auth");
-
-        if (role != "Intern")
-            return RedirectToAction("Index", "Home");
-
-        return null; 
+        return User.FindFirst("FullName")?.Value
+            ?? User.FindFirst(ClaimTypes.Name)?.Value;
     }
 }

@@ -4,7 +4,7 @@ public class User
     public string FullName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
-    public string Role { get; set; } = "Student"; 
+    public string Role { get; set; } = "Intern"; 
     public string? University { get; set; }
     public string? Bio { get; set; }
     public string? Skills { get; set; }       
