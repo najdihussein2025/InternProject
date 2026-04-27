@@ -64,7 +64,7 @@ public class UserService : IUserService
             FullName = u.FullName,
             Email = u.Email,
             Status = u.Status,
-            CreatedAt = u.JoinDate
+            Joined = u.JoinDate
         }).ToList();
     }
 
@@ -95,6 +95,78 @@ public class UserService : IUserService
 
         await _userRepo.UpdateStatusAsync(id, "Rejected");
 
+        return (true, string.Empty);
+    }
+    public async Task<List<UserDto>> GetAcceptedUsersAsync(){
+
+        var users = await _userRepo.GetAllAcceptedAsync();
+
+        return users.Select(u => new UserDto
+        {
+            Id = u.Id,
+            FullName = u.FullName,
+            Email = u.Email,
+            Major = u.Major?.Name ?? string.Empty,
+            Progress = u.Progress,
+            Status = u.Status,
+            Joined = u.JoinDate
+        }).ToList();
+    }
+    public async Task<List<UserDto>> GetAllUsersAsync(){
+        var users = await _userRepo.GetAllUsersAsync();
+        return users.Select(u => new UserDto
+        {
+            Id = u.Id,
+            FullName = u.FullName,
+            Email = u.Email,
+            Major = u.Major?.Name ?? string.Empty,
+            Progress = u.Progress,
+            Status = u.Status,
+            Joined = u.JoinDate
+
+        }).ToList();
+    }
+    public async Task<(bool Success, string Error)> CreateUserAsync(CreateUserDto dto){
+        var existing = await _userRepo.GetByEmailAsync(dto.Email);
+        if (existing != null)
+            return (false, "An account with this email already exists.");
+
+        var normalizedRole = (dto.Role ?? string.Empty).Trim().ToLower() switch
+        {
+            "admin" => "Admin",
+            "intern" => "Intern",
+            "student" => "Intern",
+            _ => "Intern"
+        };
+
+        var normalizedStatus = (dto.Status ?? string.Empty).Trim().ToLower() switch
+        {
+            "active" => "Active",
+            "pending" => "Pending",
+            "rejected" => "Rejected",
+            _ => "Pending"
+        };
+
+        int? majorId = null;
+        if (!string.IsNullOrWhiteSpace(dto.Major))
+        {
+            var major = await _userRepo.GetMajorByNameAsync(dto.Major);
+            majorId = major?.Id;
+        }
+
+        var user = new User
+        {
+            FullName = $"{dto.FirstName.Trim()} {dto.LastName.Trim()}".Trim(),
+            Email = dto.Email.Trim().ToLower(),
+            PasswordHash = PasswordHasher.Hash(dto.Password),
+            Role = normalizedRole,
+            Status = normalizedStatus,
+            MajorId = majorId,
+            Progress = 0,
+            JoinDate = DateTime.Now
+        };
+
+        await _userRepo.CreateAsync(user);
         return (true, string.Empty);
     }
 }

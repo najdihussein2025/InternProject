@@ -3,6 +3,7 @@ namespace InternSystemProject.Controllers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using InternSystemProject.DTOs.User;
 using InternSystemProject.Interfaces.Services;
 
 [Authorize(Roles = "Admin")]
@@ -26,27 +27,42 @@ public class AdminController : BaseController
     }
 
     [HttpGet]
-    public IActionResult AcceptedInterns()
+    public async Task<IActionResult> AcceptedInterns()
     {
         ViewBag.PageTitle = "Accepted Interns";
         ViewBag.AdminName = GetCurrentUserName();
-        return View();
+        var acceptedUsers = await _userService.GetAcceptedUsersAsync();
+        return View(acceptedUsers);
     }
 
     [HttpGet]
-    public IActionResult Archived()
-    {
-        ViewBag.PageTitle = "Archived";
-        ViewBag.AdminName = GetCurrentUserName();
-        return View();
-    }
-
-    [HttpGet]
-    public IActionResult Users()
+    public async Task<IActionResult> Users()
     {
         ViewBag.PageTitle = "Users";
         ViewBag.AdminName = GetCurrentUserName();
-        return View();
+        var users = await _userService.GetAllUsersAsync();
+        return View(users);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateUser(CreateUserDto dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            TempData["Error"] = "Please provide valid user information.";
+            return RedirectToAction("Users");
+        }
+
+        var (success, error) = await _userService.CreateUserAsync(dto);
+        if (!success)
+        {
+            TempData["Error"] = error;
+            return RedirectToAction("Users");
+        }
+
+        TempData["Success"] = "User created successfully.";
+        return RedirectToAction("Users");
     }
 
     [HttpGet]

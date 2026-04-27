@@ -44,7 +44,7 @@ else
                         <td>@user.Id</td>
                         <td>@user.FullName</td>
                         <td>@user.Email</td>
-                        <td>@user.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td>@user.Joined.ToString("MMM dd, yyyy")</td>
                         <td>
                             <form asp-action="ApproveUser" asp-controller="Admin"
                                   method="post" style="display:inline">
