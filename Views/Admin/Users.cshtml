@@ -5,13 +5,16 @@
 }
 @{
     var users = Model ?? Enumerable.Empty<InternSystemProject.DTOs.User.UserDto>();
+    var searchTerm = ViewBag.SearchTerm as string ?? string.Empty;
 }
 <section class="page-toolbar">
     <div>
         <h2>All Interns <span class="pill cyan-soft">@users.Count()</span></h2>
     </div>
     <div class="toolbar-actions">
-        <input type="search" placeholder="Search interns..." />
+        <form method="get" action="@Url.Action("Users", "Admin")" id="usersSearchForm">
+            <input type="search" id="usersSearchInput" name="name" value="@searchTerm" placeholder="Search interns..." />
+        </form>
         <select><option>All Majors</option><option>Web Dev</option><option>AI</option><option>Security</option><option>Data</option></select>
         <button class="btn ghost" type="button">Export CSV</button>
         <button class="btn primary-add" type="button" data-open-modal="addUserModal"><span class="plus-icon">+</span> Add User</button>
@@ -25,6 +28,22 @@
     <button data-filter="rejected">Rejected</button>
     <button data-filter="completed">Completed</button>
 </div>
+
+@section Scripts {
+    <script>
+        (() => {
+            const form = document.getElementById("usersSearchForm");
+            const input = document.getElementById("usersSearchInput");
+            if (!form || !input) return;
+
+            let timerId = null;
+            input.addEventListener("input", () => {
+                if (timerId) clearTimeout(timerId);
+                timerId = setTimeout(() => form.submit(), 350);
+            });
+        })();
+    </script>
+}
 
 <div class="table-wrap">
     <table class="admin-table" data-users-table>

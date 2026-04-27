@@ -36,11 +36,16 @@ public class AdminController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Users()
+    public async Task<IActionResult> Users(string? name)
     {
         ViewBag.PageTitle = "Users";
         ViewBag.AdminName = GetCurrentUserName();
-        var users = await _userService.GetAllUsersAsync();
+        ViewBag.SearchTerm = name ?? string.Empty;
+
+        var users = string.IsNullOrWhiteSpace(name)
+            ? await _userService.GetAllUsersAsync()
+            : await _userService.GetByNameAsync(name);
+
         return View(users);
     }
 

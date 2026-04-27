@@ -169,4 +169,17 @@ public class UserService : IUserService
         await _userRepo.CreateAsync(user);
         return (true, string.Empty);
     }
+    public async Task<List<UserDto>> GetByNameAsync(string name){
+        var users = await _userRepo.GetByNameAsync(name);
+        return users.Select(u => new UserDto
+        {
+            Id = u.Id,
+            FullName = u.FullName,
+            Email = u.Email,
+            Major = u.Major?.Name ?? string.Empty,
+            Progress = u.Progress,
+            Status = u.Status,
+            Joined = u.JoinDate
+        }).ToList();
+    }
 }

@@ -77,4 +77,11 @@ public class UserRepository : IUserRepository
             .OrderBy(u => u.JoinDate)
             .ToListAsync();
     }
+    public async Task<List<User>> GetByNameAsync(string name)
+    {
+        return await _db.Users
+            .Where(u => u.FullName.ToLower().Contains(name.Trim().ToLower()))
+            .OrderBy(u => u.JoinDate)
+            .ToListAsync();
+    }
 }

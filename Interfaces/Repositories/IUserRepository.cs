@@ -15,4 +15,5 @@ public interface IUserRepository
     Task UpdateStatusAsync(int id, string status);
     Task<List<User>> GetAllUsersAsync();
     Task CreateAsync(User user);
+    Task<List<User>> GetByNameAsync(string name);
 }

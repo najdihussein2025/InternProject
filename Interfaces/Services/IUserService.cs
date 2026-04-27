@@ -13,4 +13,5 @@ public interface IUserService
     Task<List<UserDto>> GetAcceptedUsersAsync();
     Task<List<UserDto>> GetAllUsersAsync();
     Task<(bool Success, string Error)> CreateUserAsync(CreateUserDto dto);
+    Task<List<UserDto>> GetByNameAsync(string name);
 }
