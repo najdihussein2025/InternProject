@@ -5,33 +5,33 @@ using System.Threading.Tasks;
 using InternSystemProject.Data;
 using InternSystemProject.Models;
 using InternSystemProject.Interfaces.Repositories;
-public class MajorRepository : IMajorRepository{
+public class MajorRepository : IMajorRepository {
     private readonly AppDbContext _db;
-    public MajorRepository(AppDbContext db){
+    public MajorRepository(AppDbContext db) {
         _db = db;
     }
-    public async Task<Major?> GetByNameAsync(string name){
+    public async Task<Major?> GetByNameAsync(string name) {
         return await _db.Majors.FirstOrDefaultAsync(m => m.Name.ToLower() == name.Trim().ToLower());
     }
-    public async Task<Major?> GetByIdAsync(int id){
+    public async Task<Major?> GetByIdAsync(int id) {
         return await _db.Majors
             .Include(m => m.Users)
             .FirstOrDefaultAsync(m => m.Id == id);
     }
-    public async Task<List<Major>> GetAllAsync(){
+    public async Task<List<Major>> GetAllAsync() {
         return await _db.Majors
             .Include(m => m.Users)
             .ToListAsync();
     }
-    public async Task CreateAsync(Major major){
+    public async Task CreateAsync(Major major) {
         await _db.Majors.AddAsync(major);
         await _db.SaveChangesAsync();
     }
-    public async Task UpdateAsync(Major major){
+    public async Task UpdateAsync(Major major) {
         _db.Majors.Update(major);
         await _db.SaveChangesAsync();
     }
-    public async Task DeleteAsync(int id){
+    public async Task DeleteAsync(int id) {
         var major = await _db.Majors.FindAsync(id);
         if (major == null)
         {

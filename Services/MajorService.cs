@@ -1,31 +1,37 @@
 namespace InternSystemProject.Services;
 
-using System.Threading.Tasks;
 using InternSystemProject.DTOs.Major;
 using InternSystemProject.Interfaces.Repositories;
 using InternSystemProject.Interfaces.Services;
 using InternSystemProject.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class MajorService : IMajorService
 {
     private readonly IMajorRepository _majorRepo;
 
-    public MajorService(IMajorRepository majorRepo){
+    public MajorService(IMajorRepository majorRepo)
+    {
         _majorRepo = majorRepo;
     }
 
-    public async Task<(bool Success, string Error)> CreateMajorAsync(CreateMajorDto dto){
+    public async Task<(bool Success, string Error)> CreateMajorAsync(CreateMajorDto dto)
+    {
         var existing = await _majorRepo.GetByNameAsync(dto.Name);
         if (existing != null)
             return (false, "A major with this name already exists.");
 
-        var major = new Major{
+        var major = new Major
+        {
             Name = dto.Name.Trim(),
             Description = dto.Description?.Trim(),
             Duration = string.IsNullOrWhiteSpace(dto.Duration) ? "3 Months" : dto.Duration.Trim(),
             ThemeColor = string.IsNullOrWhiteSpace(dto.ThemeColor) ? "Cyan" : dto.ThemeColor.Trim(),
             MaxInterns = dto.MaxInterns
         };
+
         await _majorRepo.CreateAsync(major);
         return (true, string.Empty);
     }
@@ -33,6 +39,7 @@ public class MajorService : IMajorService
     public async Task<List<MajorDto>> GetAllMajorsAsync()
     {
         var majors = await _majorRepo.GetAllAsync();
+
         return majors.Select(m => new MajorDto
         {
             Id = m.Id,
@@ -48,10 +55,9 @@ public class MajorService : IMajorService
     public async Task<MajorDto> GetMajorByIdAsync(int id)
     {
         var major = await _majorRepo.GetByIdAsync(id);
+
         if (major == null)
-        {
             return new MajorDto();
-        }
 
         return new MajorDto
         {
@@ -93,5 +99,11 @@ public class MajorService : IMajorService
 
         await _majorRepo.DeleteAsync(id);
         return (true, string.Empty);
+    }
+
+    // Optional helper for dropdown usage
+    public async Task<List<Major>> GetAllForDropdownAsync()
+    {
+        return await _majorRepo.GetAllAsync();
     }
 }

@@ -1,3 +1,4 @@
+@model InternSystemProject.Dtos.Application.CreateApplicationDto
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Internship Application";
@@ -5,11 +6,15 @@
 <link rel="stylesheet" href="~/css/student.css" asp-append-version="true" />
 
 <section class="student-app-wrap" style="margin-top:2.5rem;">
-    <form class="student-app-card student-panel" data-application-form novalidate>
+    <form asp-controller="Application" asp-action="Submit" method="post" class="student-app-card student-panel">
+        @Html.AntiForgeryToken()
+
         <div class="student-app-header">
             <h2>Apply for Internship</h2>
             <p>Complete the form to start your internship journey</p>
         </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom: 1rem;"></div>
 
         <div class="onboarding-steps">
             <span class="active">Step 1: Apply</span>
@@ -19,45 +24,45 @@
 
         <div class="student-app-grid">
             <div>
-                <label for="fullName">Full Name <span class="required">*</span></label>
-                <input id="fullName" name="fullName" type="text" required />
+                <label asp-for="University">University <span class="required">*</span></label>
+                <input asp-for="University" type="text" placeholder="e.g. Beirut University" />
+                <span asp-validation-for="University" class="text-danger"></span>
             </div>
-            <div>
-                <label for="age">Age <span class="required">*</span></label>
-                <input id="age" name="age" type="number" min="16" required />
-            </div>
-            <div>
-                <label for="email">Email <span class="required">*</span></label>
-                <input id="email" name="email" type="email" required />
-            </div>
-            <div>
-                <label for="major">Major <span class="required">*</span></label>
-                <select id="major" name="major" required>
-                    <option value="">-- Select Major --</option>
-                    <option>Web Development</option>
-                    <option>Cyber Security</option>
-                    <option>AI</option>
-                    <option>Data Science</option>
-                </select>
-            </div>
-            <div>
-                <label for="skills">Skills <span class="required">*</span></label>
-                <input id="skills" name="skills" type="text" placeholder="e.g. .NET, API, Docker" required />
-            </div>
-            <div>
-                <label for="languages">Programming Languages <span class="required">*</span></label>
-                <input id="languages" name="languages" type="text" placeholder="C#, Python, JavaScript" required />
-            </div>
-        </div>
 
-        <div class="student-app-upload">
             <div>
-                <label for="projectFile">Upload Projects (file)</label>
-                <input id="projectFile" name="projectFile" type="file" />
+                <label asp-for="GraduationYear">Graduation Year <span class="required">*</span></label>
+                <input asp-for="GraduationYear" type="number" placeholder="e.g. 2025" />
+                <span asp-validation-for="GraduationYear" class="text-danger"></span>
             </div>
+
             <div>
-                <label for="projectUrl">Project URL (GitHub / Portfolio)</label>
-                <input id="projectUrl" name="projectUrl" type="url" placeholder="https://github.com/username/project" />
+                <label asp-for="AppliedMajorId">Major <span class="required">*</span></label>
+                <select asp-for="AppliedMajorId" required>
+                    <option value="">-- Select Major --</option>
+                    @foreach (var major in ViewBag.Majors)
+                    {
+                        <option value="@major.Id">@major.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="AppliedMajorId" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Skills">Skills <span class="required">*</span></label>
+                <input asp-for="Skills" type="text" placeholder="e.g. .NET, API, Docker" />
+                <span asp-validation-for="Skills" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="GitHubUrl">Project URL (GitHub / Portfolio)</label>
+                <input asp-for="GitHubUrl" type="url" placeholder="https://github.com/username/project" />
+                <span asp-validation-for="GitHubUrl" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="CoverNote">Cover Note</label>
+                <textarea asp-for="CoverNote" rows="4" placeholder="Tell us why you're interested..."></textarea>
+                <span asp-validation-for="CoverNote" class="text-danger"></span>
             </div>
         </div>
 
@@ -67,5 +72,6 @@
 </section>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/student.js" asp-append-version="true"></script>
 }

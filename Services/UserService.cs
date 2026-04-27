@@ -67,36 +67,6 @@ public class UserService : IUserService
             Joined = u.JoinDate
         }).ToList();
     }
-
-    // Approve: set Status to Active
-    public async Task<(bool Success, string Error)> ApproveUserAsync(int id)
-    {
-        var user = await _userRepo.GetByIdAsync(id);
-        if (user == null)
-            return (false, "User not found.");
-
-        if (user.Status != "Pending")
-            return (false, "User is not in pending state.");
-
-        await _userRepo.UpdateStatusAsync(id, "Active");
-
-        return (true, string.Empty);
-    }
-
-    // Reject: set Status to Rejected
-    public async Task<(bool Success, string Error)> RejectUserAsync(int id)
-    {
-        var user = await _userRepo.GetByIdAsync(id);
-        if (user == null)
-            return (false, "User not found.");
-
-        if (user.Status != "Pending")
-            return (false, "User is not in pending state.");
-
-        await _userRepo.UpdateStatusAsync(id, "Rejected");
-
-        return (true, string.Empty);
-    }
     public async Task<List<UserDto>> GetAcceptedUsersAsync(){
 
         var users = await _userRepo.GetAllAcceptedAsync();

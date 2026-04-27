@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 namespace InternSystemProject.Interfaces.Services;
 
 using System.Threading.Tasks;
@@ -10,4 +11,6 @@ public interface IMajorService
     Task<MajorDto> GetMajorByIdAsync(int id);
     Task<(bool Success, string Error)> UpdateMajorAsync(int id, UpdateMajorDto dto);
     Task<(bool Success, string Error)> DeleteMajorAsync(int id);
+
+    Task<List<Major>> GetAllForDropdownAsync();
 }

@@ -15,5 +15,9 @@ public interface IUserRepository
     Task UpdateStatusAsync(int id, string status);
     Task<List<User>> GetAllUsersAsync();
     Task CreateAsync(User user);
+<<<<<<< HEAD
     Task<List<User>> GetByNameAsync(string name);
+=======
+    Task AssignMajorAsync(int userId, int majorId);
+>>>>>>> 9269a7e (Added Application Logic for Interns)
 }

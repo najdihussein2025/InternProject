@@ -84,4 +84,13 @@ public class UserRepository : IUserRepository
             .OrderBy(u => u.JoinDate)
             .ToListAsync();
     }
+
+    public async Task AssignMajorAsync(int userId, int majorId)
+    {
+        var user = await _db.Users.FindAsync(userId);
+        if (user == null) return;
+
+        user.MajorId = majorId;
+        await _db.SaveChangesAsync();
+    }
 }

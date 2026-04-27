@@ -1,12 +1,13 @@
-using Microsoft.EntityFrameworkCore;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using InternSystemProject.Data;
 using InternSystemProject.Interfaces.Repositories;
 using InternSystemProject.Interfaces.Services;
+using InternSystemProject.Models;
 using InternSystemProject.Repositories;
 using InternSystemProject.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddHttpContextAccessor();
 // REPOSITORIES
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IMajorRepository, MajorRepository>();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -33,6 +35,8 @@ builder.Services.AddScoped<IMajorRepository, MajorRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMajorService, MajorService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AUTHENTICATION / AUTHORIZATION

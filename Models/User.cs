@@ -20,4 +20,5 @@ public class User
     public ICollection<StudentProject> StudentProjects { get; set; } = new List<StudentProject>();
     public ICollection<StudentFinalProject> StudentFinalProjects { get; set; } = new List<StudentFinalProject>();
     public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+    public ICollection<Application> Applications { get; set; } = new List<Application>();
 }

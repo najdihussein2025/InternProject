@@ -1,21 +1,26 @@
 namespace InternSystemProject.Controllers;
 
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using InternSystemProject.DTOs.User;
 using InternSystemProject.Interfaces.Services;
+using InternSystemProject.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 [Authorize(Roles = "Admin")]
 public class AdminController : BaseController
 {
     private readonly IUserService _userService;
-    private readonly IMajorService _majorService;
 
-    public AdminController(IUserService userService, IMajorService majorService)
+    private readonly IMajorService _majorService;
+    private readonly IApplicationService _appService;
+
+    public AdminController(IUserService userService, IMajorService majorService, IApplicationService appService)
     {
         _userService = userService;
         _majorService = majorService;
+        _appService = appService;
+
     }
 
     // ── DASHBOARD ────────────────────────────────
@@ -193,15 +198,15 @@ public class AdminController : BaseController
         ViewBag.PageTitle = "Applications";
         ViewBag.AdminName = GetCurrentUserName();
 
-        var pending = await _userService.GetPendingUsersAsync();
+        var pending = await _appService.GetAllPendingApplicationsAsync(); // Changed to get pending applications
         return View(pending);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ApproveUser(int id)
+    public async Task<IActionResult> ApproveUser(int id, int majorId)
     {
-        var (success, error) = await _userService.ApproveUserAsync(id);
+        var (success, error) = await _appService.ApproveApplicationAsync(id, majorId); // Changed to approve function of the application service
 
         if (success)
             TempData["Success"] = "Intern approved successfully.";
@@ -213,9 +218,9 @@ public class AdminController : BaseController
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RejectUser(int id)
+    public async Task<IActionResult> RejectUser(int id, string reason)
     {
-        var (success, error) = await _userService.RejectUserAsync(id);
+        var (success, error) = await _appService.RejectApplicationAsync(id, reason); // Changed to reject function of the application service
 
         if (success)
             TempData["Success"] = "Intern rejected.";
